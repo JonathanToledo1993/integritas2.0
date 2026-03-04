@@ -487,7 +487,7 @@
     <!-- Scripts -->
     <script>
         const token = localStorage.getItem('kokoro_client_token');
-        if (!token) window.location.href = '../../index.html';
+        if (!token) window.location.href = '../../login.html';
 
         // TABS LOGIC
         function switchTab(tabId) {
@@ -517,7 +517,7 @@
 
         async function loadConfig() {
             try {
-                const res = await fetch('../../api/client/config/get.php', {
+                const res = await fetch('../../../api/client/config/get.php', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -576,7 +576,7 @@
                     updateCount(document.getElementById('tpl_subject'), 'subjCount');
 
                 } else if (res.status === 401) {
-                    window.location.href = '../../index.html';
+                    window.location.href = '../../login.html';
                 }
             } catch (error) {
                 console.error("Error cargando config", error);
@@ -625,7 +625,7 @@
             btn.disabled = true;
             btn.innerHTML = 'Enviando invitación...';
             try {
-                const res = await fetch('../../api/client/config/save.php', {
+                const res = await fetch('../../../api/client/config/save.php', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -678,7 +678,7 @@
             stat.classList.add('hidden');
 
             try {
-                const res = await fetch('../../api/client/config/save.php', {
+                const res = await fetch('../../../api/client/config/save.php', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)

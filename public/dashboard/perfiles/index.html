@@ -177,13 +177,13 @@
     <!-- Scripts -->
     <script>
         const token = localStorage.getItem('kokoro_client_token');
-        if (!token) window.location.href = '../../index.html';
+        if (!token) window.location.href = '../../login.html';
 
         document.addEventListener('DOMContentLoaded', fetchProfiles);
 
         async function fetchProfiles() {
             try {
-                const res = await fetch('../../api/client/profiles/list.php', {
+                const res = await fetch('../../../api/client/profiles/list.php', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -273,7 +273,7 @@
             }
 
             try {
-                const res = await fetch('../../api/client/profiles/create.php', {
+                const res = await fetch('../../../api/client/profiles/create.php', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -299,7 +299,7 @@
 
         function logout() {
             localStorage.removeItem('kokoro_client_token');
-            window.location.href = '../../index.html';
+            window.location.href = '../../login.html';
         }
     </script>
 </body>

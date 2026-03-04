@@ -165,7 +165,7 @@
     <!-- Scripts -->
     <script>
         const token = localStorage.getItem('kokoro_client_token');
-        if (!token) window.location.href = '../../index.html';
+        if (!token) window.location.href = '../../login.html';
 
         let currentBundle = null;
 
@@ -184,7 +184,7 @@
             btn.innerHTML = '<i class="ph ph-spinner animate-spin"></i>';
 
             try {
-                const res = await fetch('../../api/client/ai/recommend.php', {
+                const res = await fetch('../../../api/client/ai/recommend.php', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({ jobDescription: userText })
@@ -297,7 +297,7 @@
                     testKeys: currentBundle.tests // Guardo todo el arreglo de pruebas recomendadas como JSON
                 };
 
-                const res = await fetch('../../api/client/custom_tests/save.php', {
+                const res = await fetch('../../../api/client/custom_tests/save.php', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -323,7 +323,7 @@
 
         function logout() {
             localStorage.removeItem('kokoro_client_token');
-            window.location.href = '../../index.html';
+            window.location.href = '../../login.html';
         }
     </script>
 </body>
