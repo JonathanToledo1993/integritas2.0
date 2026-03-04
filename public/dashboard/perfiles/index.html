@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfiles (Carpeta) | Kokoro Empresas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200 gap-3">
+            <div class="w-8 h-8 bg-black text-white font-bold rounded flex items-center justify-center text-sm">K</div>
+            <span class="font-semibold text-lg tracking-tight text-black">Kokoro Clientes</span>
+        </div>
+
+        <div class="p-4 flex-1 overflow-y-auto">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </a>
+                <a href="../postulantes/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-users text-lg"></i> Postulantes
+                </a>
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
+                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../biblioteca/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
+                </a>
+                <a href="../crea/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
+                </a>
+                <a href="../digitaliza/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <nav class="space-y-1">
+                <a href="../configuracion/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-gear text-lg"></i> Configuración
+                </a>
+            </nav>
+        </div>
+
+        <div class="border-t border-gray-200 p-4">
+            <button onclick="logout()"
+                class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
+                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
+            <div class="font-bold flex items-center gap-2">
+                <div class="w-6 h-6 bg-black text-white rounded flex items-center justify-center text-xs">K</div>
+                Kokoro
+            </div>
+            <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between mb-8">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Perfiles Ideales de Puesto
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-500">Compara los puntajes de tus postulantes contra los valores
+                        base del cargo.</p>
+                </div>
+                <div class="mt-4 flex md:ml-4 md:mt-0 gap-3">
+                    <button type="button" onclick="openModal()"
+                        class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">
+                        <i class="ph ph-plus mr-2 text-lg"></i> Nuevo Perfil
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profiles Data Table -->
+            <div id="profilesContainer" class="bg-white shadow sm:rounded-lg overflow-hidden border border-gray-100">
+                <div class="p-6 text-center text-gray-500 py-12" id="profilesLoading">
+                    <i class="ph ph-spinner animate-spin text-4xl mb-3 text-gray-300"></i>
+                    <p>Cargando perfiles...</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Create Profile Modal -->
+    <div id="createProfileModal" class="relative z-50 hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                    <div>
+                        <div class="mt-3 text-center sm:mt-5">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Nuevo Perfil de
+                                Cargo</h3>
+                            <div class="mt-2 text-left">
+                                <form id="createProfileForm" class="space-y-4">
+                                    <div>
+                                        <label for="p_name"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Nombre del Perfil
+                                            *</label>
+                                        <div class="mt-2">
+                                            <input type="text" name="name" id="p_name"
+                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-3"
+                                                placeholder="Ej. Ejecutivo de Ventas Senior" required>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="p_hierarchy"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Jerarquía</label>
+                                            <select name="hierarchy" id="p_hierarchy"
+                                                class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-3">
+                                                <option value="">Seleccionar...</option>
+                                                <option value="Operativo">Operativo</option>
+                                                <option value="Mando Medio">Mando Medio</option>
+                                                <option value="Gerencial">Gerencial / Directivo</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="p_area"
+                                                class="block text-sm font-medium leading-6 text-gray-900">Área</label>
+                                            <input type="text" name="area" id="p_area"
+                                                class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-3"
+                                                placeholder="Ej. Comercial">
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 pt-2"><i class="ph ph-info"></i> Nota: Las pruebas
+                                        específicas a evaluar (tests) se asignarán dentro del detalle del perfil luego
+                                        de crearlo.</p>
+                                    <div id="modalError" class="text-red-500 text-sm hidden"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                        <button type="button" onclick="submitProfile()"
+                            class="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 sm:col-start-2">Guardar
+                            Perfil</button>
+                        <button type="button" onclick="closeModal()"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const token = localStorage.getItem('kokoro_client_token');
+        if (!token) window.location.href = '../../index.html';
+
+        document.addEventListener('DOMContentLoaded', fetchProfiles);
+
+        async function fetchProfiles() {
+            try {
+                const res = await fetch('../../api/client/profiles/list.php', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    renderProfiles(data.data.profiles);
+                } else if (res.status === 401) {
+                    logout();
+                } else {
+                    showError(data.message);
+                }
+            } catch (error) {
+                showError("No se pudo conectar con el servidor.");
+            }
+        }
+
+        function renderProfiles(profiles) {
+            const container = document.getElementById('profilesContainer');
+
+            if (!profiles || profiles.length === 0) {
+                container.innerHTML = `
+                    <div class="p-12 text-center text-gray-500">
+                        <i class="ph ph-briefcase text-4xl mb-3 text-gray-300"></i>
+                        <p>No tienes Perfiles Creados.</p>
+                        <button onclick="openModal()" class="mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500">Crea tu primer perfil Ideal &rarr;</button>
+                    </div>`;
+                return;
+            }
+
+            let tableHTML = `
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nombre de Perfil</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Jerarquía / Área</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Configuración (Pruebas)</th>
+                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6"><span class="sr-only">Editar</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+            `;
+
+            profiles.forEach(p => {
+                const testCount = p.testKeys ? p.testKeys.length : 0;
+                tableHTML += `
+                    <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">${p.name}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${p.hierarchy || '-'} <span class="text-gray-300">|</span> ${p.area || '-'}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            ${testCount > 0 ? `<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">${testCount} Pruebas asignadas</span>` : `<span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">Sin Definir</span>`}
+                        </td>
+                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Configurar<span class="sr-only">, ${p.name}</span></a>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `</tbody></table>`;
+            container.innerHTML = tableHTML;
+        }
+
+        function showError(msg) {
+            document.getElementById('profilesContainer').innerHTML = `<div class="p-8 text-center text-red-500">${msg}</div>`;
+        }
+
+        function openModal() {
+            document.getElementById('createProfileModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('createProfileModal').classList.add('hidden');
+            document.getElementById('createProfileForm').reset();
+            document.getElementById('modalError').classList.add('hidden');
+        }
+
+        async function submitProfile() {
+            const name = document.getElementById('p_name').value;
+            const hierarchy = document.getElementById('p_hierarchy').value;
+            const area = document.getElementById('p_area').value;
+            const errorDiv = document.getElementById('modalError');
+
+            if (!name) {
+                errorDiv.textContent = "El nombre es obligatorio.";
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const res = await fetch('../../api/client/profiles/create.php', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, hierarchy, area })
+                });
+
+                const data = await res.json();
+                if (data.status === 'success') {
+                    closeModal();
+                    document.getElementById('profilesContainer').innerHTML = `<div class="p-12 text-center text-gray-500"><i class="ph ph-spinner animate-spin text-4xl mb-3 text-gray-300"></i></div>`;
+                    fetchProfiles(); // recargar
+                } else {
+                    errorDiv.textContent = data.message;
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorDiv.textContent = "Error de conexión.";
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('kokoro_client_token');
+            window.location.href = '../../index.html';
+        }
+    </script>
+</body>
+
+</html>

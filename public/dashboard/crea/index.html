@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea Tu Prueba | Kokoro Empresas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200 gap-3">
+            <div class="w-8 h-8 bg-black text-white font-bold rounded flex items-center justify-center text-sm">K</div>
+            <span class="font-semibold text-lg tracking-tight text-black">Kokoro Clientes</span>
+        </div>
+
+        <div class="p-4 flex-1 overflow-y-auto">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </a>
+                <a href="../postulantes/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-users text-lg"></i> Postulantes
+                </a>
+                <a href="../perfiles/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../biblioteca/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
+                </a>
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
+                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
+                </a>
+                <a href="../digitaliza/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <nav class="space-y-1">
+                <a href="../configuracion/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-gear text-lg"></i> Configuración
+                </a>
+            </nav>
+        </div>
+
+        <div class="border-t border-gray-200 p-4">
+            <button onclick="logout()"
+                class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
+                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
+            <div class="font-bold flex items-center gap-2">
+                <div class="w-6 h-6 bg-black text-white rounded flex items-center justify-center text-xs">K</div>
+                Kokoro
+            </div>
+            <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between mb-8">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Crea Tu Prueba Ad-Hoc
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-500">Diseña una evaluación técnica o técnica con banco de preguntas
+                        único.</p>
+                </div>
+            </div>
+
+            <!-- 2-Column Layout for AI Builder -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Left Column: Chat AI -->
+                <div
+                    class="lg:col-span-2 bg-white shadow sm:rounded-lg overflow-hidden border border-gray-100 flex flex-col h-[600px]">
+                    <div class="px-6 py-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900 flex items-center">
+                            <i class="ph ph-sparkle text-blue-500 mr-2 text-xl"></i> Asistente IA Kokoro
+                        </h3>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div id="chatArea" class="flex-1 p-6 overflow-y-auto space-y-4 bg-white">
+                        <!-- Initial Bot Message -->
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-blue-100 rounded-full p-2">
+                                <i class="ph ph-robot text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 max-w-[85%] text-sm text-gray-700">
+                                <p>¡Hola! Soy tu asistente de reclutamiento. Dime, <strong>¿qué cargo deseas
+                                        evaluar?</strong> Puedes escribir el nombre del puesto o pegar la descripción
+                                    completa de tu vacante para darte mejores recomendaciones.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="p-4 bg-white border-t border-gray-100">
+                        <form id="aiForm" class="flex gap-3">
+                            <textarea id="aiInput" rows="2"
+                                class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                                placeholder="Escribe aquí (Ej. Desarrollador Frontend con react...)"></textarea>
+                            <button type="submit"
+                                class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 h-fit self-end transition-colors">
+                                <i class="ph ph-paper-plane-right mr-2"></i> Enviar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column: My Test Bundle -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white shadow sm:rounded-lg overflow-hidden border border-gray-100 sticky top-6">
+                        <div class="px-4 py-5 sm:px-6 bg-gray-50 border-b border-gray-100">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900">Mi Prueba Personalizada</h3>
+                            <p class="mt-1 max-w-2xl text-sm text-gray-500">Paquete sugerido por IA</p>
+                        </div>
+                        <div class="px-4 py-5 sm:p-6" id="bundleContainer">
+                            <div class="text-center py-10 text-gray-400">
+                                <i class="ph ph-cube text-4xl mb-2 text-gray-200"></i>
+                                <p class="text-sm">Chatea con Kokoro para generar tu primera propuesta.</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-4 sm:px-6 border-t border-gray-100" id="saveContainer"
+                            style="display: none;">
+                            <button type="button" onclick="saveAIBundle()" id="saveBtn"
+                                class="w-full inline-flex justify-center items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 transition-colors">
+                                <i class="ph ph-floppy-disk mr-2"></i> Guardar y Usar Prueba
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const token = localStorage.getItem('kokoro_client_token');
+        if (!token) window.location.href = '../../index.html';
+
+        let currentBundle = null;
+
+        document.getElementById('aiForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('aiInput');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            appendMessage('user', userText);
+            input.value = '';
+
+            // Disable while loading
+            const btn = e.target.querySelector('button');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ph ph-spinner animate-spin"></i>';
+
+            try {
+                const res = await fetch('../../api/client/ai/recommend.php', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jobDescription: userText })
+                });
+
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    currentBundle = data.data.recommendation;
+
+                    // Reply in chat
+                    let replyHTML = `<p class="mb-2">He analizado los requerimientos. Te sugiero un paquete compuesto por <strong>${currentBundle.tests.length} pruebas</strong> que tomarían alrededor de ${currentBundle.totalMins} minutos en total.</p>`;
+                    replyHTML += `<ul class="list-disc pl-4 space-y-1 mt-2">`;
+                    currentBundle.tests.forEach(t => {
+                        replyHTML += `<li><strong>${t.name}</strong>: <span class="text-gray-500">${t.reason}</span></li>`;
+                    });
+                    replyHTML += `</ul><p class="mt-3 text-xs text-blue-600 font-semibold">Revisa la tarjeta de la derecha para guardar tu nueva prueba.</p>`;
+
+                    appendMessage('bot', replyHTML);
+                    renderBundleCard();
+                } else {
+                    appendMessage('bot', `<span class="text-red-500">${data.message}</span>`);
+                }
+            } catch (err) {
+                appendMessage('bot', `<span class="text-red-500">Ocurrió un error conectando con el motor IA.</span>`);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ph ph-paper-plane-right mr-2"></i> Enviar';
+            }
+        });
+
+        function appendMessage(sender, textOrHtml) {
+            const chatBox = document.getElementById('chatArea');
+            const div = document.createElement('div');
+
+            if (sender === 'user') {
+                div.className = 'flex items-start gap-4 justify-end';
+                div.innerHTML = `
+                    <div class="bg-black text-white rounded-lg p-4 max-w-[85%] text-sm">
+                        <p>${textOrHtml.replace(/\n/g, '<br>')}</p>
+                    </div>
+                `;
+            } else {
+                div.className = 'flex items-start gap-4';
+                div.innerHTML = `
+                    <div class="flex-shrink-0 bg-blue-100 rounded-full p-2">
+                        <i class="ph ph-sparkle text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 max-w-[90%] text-sm text-gray-700 shadow-sm border border-blue-100">
+                        ${textOrHtml}
+                    </div>
+                `;
+            }
+
+            chatBox.appendChild(div);
+            // Scroll to bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function renderBundleCard() {
+            if (!currentBundle) return;
+
+            const container = document.getElementById('bundleContainer');
+
+            let html = `
+                <div>
+                    <h4 class="text-sm font-bold text-gray-900 mb-1">${currentBundle.bundleName}</h4>
+                    <p class="text-xs text-gray-500 mb-4">${currentBundle.description}</p>
+                    
+                    <div class="bg-blue-50 rounded p-3 flex items-center justify-between mb-4">
+                        <span class="text-xs font-semibold text-blue-800">Duración Aprox:</span>
+                        <span class="text-sm text-blue-900 font-bold">${currentBundle.totalMins} min</span>
+                    </div>
+
+                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Pruebas Incluidas (${currentBundle.tests.length})</h5>
+                    <ul class="space-y-3">
+            `;
+
+            currentBundle.tests.forEach((t, i) => {
+                html += `
+                    <li class="flex items-start">
+                        <span class="flex items-center justify-center h-5 w-5 rounded-full bg-gray-200 text-xs font-bold text-gray-600 mt-0.5 mr-2 flex-shrink-0">${i + 1}</span>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900 leading-tight">${t.name}</p>
+                        </div>
+                    </li>
+                `;
+            });
+
+            html += `</ul></div>`;
+            container.innerHTML = html;
+            document.getElementById('saveContainer').style.display = 'block';
+        }
+
+        async function saveAIBundle() {
+            if (!currentBundle) return;
+
+            const btn = document.getElementById('saveBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> Guardando...';
+
+            try {
+                // Map the frontend structure to the backend model expected
+                const payload = {
+                    name: currentBundle.bundleName,
+                    description: currentBundle.description,
+                    isAiGenerated: 1,
+                    totalDuration: currentBundle.totalMins,
+                    testKeys: currentBundle.tests // Guardo todo el arreglo de pruebas recomendadas como JSON
+                };
+
+                const res = await fetch('../../api/client/custom_tests/save.php', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    // Success! Redirect to library Custom tab (simulated by going to standard lib for now until custom is added there)
+                    alert("¡Prueba creada con éxito! Redirigiendo a tu Biblioteca...");
+                    window.location.href = '../biblioteca/index.html';
+                } else {
+                    alert("Error: " + data.message);
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            } catch (err) {
+                alert("Ocurrió un error al guardar.");
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('kokoro_client_token');
+            window.location.href = '../../index.html';
+        }
+    </script>
+</body>
+
+</html>

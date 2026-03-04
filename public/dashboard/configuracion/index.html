@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración | Kokoro Empresas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200 gap-3">
+            <div class="w-8 h-8 bg-black text-white font-bold rounded flex items-center justify-center text-sm">K</div>
+            <span class="font-semibold text-lg tracking-tight text-black">Kokoro Clientes</span>
+        </div>
+
+        <div class="p-4">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </a>
+                <a href="../postulantes/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-users text-lg"></i> Postulantes
+                </a>
+                <a href="../perfiles/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../biblioteca/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
+                </a>
+                <a href="../crea/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
+                </a>
+                <a href="../digitaliza/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <nav class="space-y-1">
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
+                    <i class="ph ph-gear text-lg"></i> Configuración
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
+            <div class="font-bold">Kokoro</div>
+            <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-8 border-b border-gray-200 pb-5">
+                <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl tracking-tight">
+                    Configuración de Cuenta
+                </h2>
+                <p class="mt-2 text-sm text-gray-500">Ajusta tu perfil, controla a los miembros del equipo y edita
+                    plantillas de notificación.</p>
+            </div>
+
+            <!-- Fake Tabs Navigation -->
+            <div class="mb-8">
+                <nav class="flex space-x-8 border-b border-gray-200" aria-label="Tabs">
+                    <a href="#"
+                        class="border-black text-black whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                        aria-current="page">General</a>
+                    <a href="#"
+                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">Gestión
+                        de Equipo</a>
+                    <a href="#"
+                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">Plantillas
+                        de Correo</a>
+                    <a href="#"
+                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">Suscripción</a>
+                </nav>
+            </div>
+
+            <div class="bg-white shadow sm:rounded-lg border border-gray-100 max-w-3xl">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900">Perfil de la Empresa</h3>
+                    <div class="mt-2 text-sm text-gray-500">
+                        <p>Actualice el nombre comercial y el RFC.</p>
+                    </div>
+                    <form id="configForm" class="mt-5 space-y-4">
+                        <div id="cfgMessage" class="hidden text-sm bg-green-50 text-green-700 p-2 rounded"></div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Nombre de Compañía</label>
+                            <input type="text" class="mt-1 form-input w-full bg-gray-50" value="Cargando..." readonly
+                                id="cfgName">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">RFC / Identificación Fiscal</label>
+                            <input type="text" id="cfgRfc" class="mt-1 form-input w-full"
+                                placeholder="Razón social interna">
+                        </div>
+                        <div class="pt-4 flex justify-end">
+                            <button type="button" onclick="saveConfig()" class="btn-primary w-auto">Guardar
+                                Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const token = localStorage.getItem('kokoro_client_token');
+        if (!token) window.location.href = '../../index.html';
+
+        document.addEventListener('DOMContentLoaded', loadConfig);
+
+        async function loadConfig() {
+            try {
+                const res = await fetch('../../api/client/config/get.php', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    const c = data.data.company;
+                    document.getElementById('cfgName').value = c.name;
+                    document.getElementById('cfgRfc').value = c.rfc || '';
+                } else if (res.status === 401) {
+                    logout();
+                }
+            } catch (error) {
+                console.error("Error cargando config", error);
+            }
+        }
+
+        async function saveConfig() {
+            const rfc = document.getElementById('cfgRfc').value;
+            const msgBox = document.getElementById('cfgMessage');
+
+            try {
+                const res = await fetch('../../api/client/config/save.php', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ rfc })
+                });
+
+                const data = await res.json();
+
+                msgBox.classList.remove('hidden');
+                if (data.status === 'success') {
+                    msgBox.className = "text-sm bg-green-50 text-green-700 p-3 rounded mb-4";
+                    msgBox.textContent = data.message;
+                    setTimeout(() => msgBox.classList.add('hidden'), 3000);
+                } else {
+                    msgBox.className = "text-sm bg-red-50 text-red-700 p-3 rounded mb-4";
+                    msgBox.textContent = data.message;
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('kokoro_client_token');
+            window.location.href = '../../index.html';
+        }
+    </script>
+</body>
+
+</html>

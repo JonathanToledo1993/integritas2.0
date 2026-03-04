@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Kokoro Empresas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        const token = localStorage.getItem('kokoro_client_token');
+        const user = JSON.parse(localStorage.getItem('kokoro_client_user') || '{}');
+
+        if (!token) {
+            window.location.href = "../login.html";
+        }
+
+        function logout() {
+            localStorage.removeItem('kokoro_client_token');
+            localStorage.removeItem('kokoro_client_user');
+            window.location.href = "../login.html";
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200 gap-3">
+            <div class="w-8 h-8 bg-black text-white font-bold rounded flex items-center justify-center text-sm">K</div>
+            <span class="font-semibold text-lg tracking-tight text-black">Kokoro Clientes</span>
+        </div>
+
+        <div class="p-4 flex-1 overflow-y-auto">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
+            <nav class="space-y-1 mb-8">
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </a>
+                <a href="postulantes/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-users text-lg"></i> Postulantes
+                </a>
+                <a href="perfiles/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
+            <nav class="space-y-1 mb-8">
+                <a href="biblioteca/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
+                </a>
+                <a href="crea/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
+                </a>
+                <a href="digitaliza/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <nav class="space-y-1">
+                <a href="configuracion/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-gear text-lg"></i> Configuración
+                </a>
+            </nav>
+        </div>
+
+        <div class="border-t border-gray-200 p-4">
+            <button onclick="logout()"
+                class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
+                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
+            <div class="font-bold flex items-center gap-2">
+                <div class="w-6 h-6 bg-black text-white rounded flex items-center justify-center text-xs">K</div>
+                Kokoro
+            </div>
+            <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between mb-8">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Bienvenido, <span id="headerName" class="text-blue-600"></span>
+                    </h2>
+                    <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+                        <div class="mt-2 flex items-center text-sm text-gray-500">
+                            <i class="ph ph-buildings mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"></i>
+                            <span id="companyNameDisplay">Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex md:ml-4 md:mt-0 gap-3">
+                    <button type="button"
+                        class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                        <i class="ph ph-shopping-cart mr-2 text-lg"></i> Comprar Créditos
+                    </button>
+                    <button type="button" onclick="window.location.href='create_candidate.html'"
+                        class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+                        <i class="ph ph-user-plus mr-2 text-lg"></i> Invitar
+                    </button>
+                    <button type="button" onclick="openCreateEvaluationModal()"
+                        class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                        <i class="ph ph-folder-plus mr-2 text-lg"></i> Crear Evaluación
+                    </button>
+                </div>
+            </div>
+
+            <!-- Metrics Cards -->
+            <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3 mb-8">
+                <div
+                    class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 border border-gray-100 border-t-4 border-t-black">
+                    <dt class="truncate text-sm font-medium text-gray-500">Plan de Servicio</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" id="metricPlan">-</dd>
+                </div>
+                <div
+                    class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 border border-gray-100 border-t-4 border-t-blue-500">
+                    <dt class="truncate text-sm font-medium text-gray-500">Créditos Disponibles</dt>
+                    <dd class="mt-1 flex items-baseline gap-2">
+                        <span class="text-3xl font-semibold tracking-tight text-gray-900" id="metricCredits">-</span>
+                        <span class="text-sm font-medium text-gray-500">reportes a descargar</span>
+                    </dd>
+                </div>
+                <div
+                    class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 border border-gray-100 border-t-4 border-t-gray-400">
+                    <dt class="truncate text-sm font-medium text-gray-500">Candidatos Evaluados</dt>
+                    <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900" id="metricEvals">-</dd>
+                </div>
+            </dl>
+
+            <!-- Main Datatable -->
+            <div class="bg-white shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg mb-20">
+                <div class="px-4 py-5 sm:px-6 flex justify-between items-center border-b border-gray-200">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900">Evaluaciones Activas</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                    Candidato
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Vencimiento</th>
+                                <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
+                                    Reporte
+                                    DTP</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200" id="evaluationsBody">
+                            <tr>
+                                <td colspan="4" class="p-6 text-center text-gray-500">Cargando datos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            document.getElementById('headerName').textContent = user.name;
+
+            async function loadDashboard() {
+                try {
+                    const res = await fetch('../../api/client/dashboard.php', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+
+                    const data = await res.json();
+
+                    if (!res.ok || !data.success) {
+                        if (res.status === 401) logout();
+                        throw new Error(data.error);
+                    }
+
+                    const company = data.data.company;
+                    const evaluations = data.data.recent_evaluations;
+
+                    document.getElementById('companyNameDisplay').textContent = company.name;
+
+                    document.getElementById('metricPlan').textContent = company.plan === 'UNLIMITED' ? 'Ilimitado' : 'Pago por Uso';
+                    document.getElementById('metricCredits').textContent = company.plan === 'UNLIMITED' ? '∞' : company.actualCredits;
+                    document.getElementById('metricEvals').textContent = evaluations.length;
+
+                    const tbody = document.getElementById('evaluationsBody');
+                    tbody.innerHTML = '';
+
+                    if (evaluations.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-gray-500">Aún no has invitado candidatos.</td></tr>`;
+                        return;
+                    }
+
+                    evaluations.forEach(ev => {
+                        const row = document.createElement('tr');
+
+                        // Lógica para vencido o activo
+                        const fExp = new Date(ev.expiresAt);
+                        const isExpired = fExp < new Date();
+                        const statusClass = isExpired ? 'text-red-600' : 'text-green-600';
+
+                        row.innerHTML = `
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">${ev.name}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${ev.email}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm ${statusClass}">${fExp.toLocaleDateString()}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-center">
+                            <button onclick="downloadReport('${ev.id}')" class="inline-flex items-center rounded bg-gray-50 px-2 py-1 text-xs font-semibold text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 hover:text-black">
+                                <i class="ph ph-download mr-1"></i> Descargar DTP
+                            </button>
+                        </td>
+                    `;
+                        tbody.appendChild(row);
+                    });
+
+                } catch (e) {
+                    alert("Error cargando dashboard: " + e.message);
+                }
+            }
+
+            async function downloadReport(inviteId) {
+                // Emula el End-point de descuento de créditos
+                if (!confirm("¿Está seguro? Esto descontará 1 Crédito de su plan por la descarga del reporte completo del candidato.")) return;
+
+                try {
+                    const res = await fetch('../../api/client/report_download.php', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ inviteId })
+                    });
+
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error);
+
+                    alert(data.message);
+                    loadDashboard(); // Recargar créditos
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+
+            loadDashboard();
+        </script>
+</body>
+
+</html>

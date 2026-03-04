@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca | Kokoro Empresas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200 gap-3">
+            <div class="w-8 h-8 bg-black text-white font-bold rounded flex items-center justify-center text-sm">K</div>
+            <span class="font-semibold text-lg tracking-tight text-black">Kokoro Clientes</span>
+        </div>
+
+        <div class="p-4 flex-1 overflow-y-auto">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </a>
+                <a href="../postulantes/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-users text-lg"></i> Postulantes
+                </a>
+                <a href="../perfiles/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
+            <nav class="space-y-1 mb-8">
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
+                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
+                </a>
+                <a href="../crea/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
+                </a>
+                <a href="../digitaliza/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <nav class="space-y-1">
+                <a href="../configuracion/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-gear text-lg"></i> Configuración
+                </a>
+            </nav>
+        </div>
+
+        <div class="border-t border-gray-200 p-4">
+            <button onclick="logout()"
+                class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
+                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
+            <div class="font-bold flex items-center gap-2">
+                <div class="w-6 h-6 bg-black text-white rounded flex items-center justify-center text-xs">K</div>
+                Kokoro
+            </div>
+            <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between mb-8">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Catálogo Oficial Kokoro
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-500">Explora las pruebas prediseñadas por nuestros expertos
+                        psicólogos.</p>
+                </div>
+            </div>
+
+            <div id="catalogGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="col-span-full py-12 text-center text-sm text-gray-500">
+                    <i class="ph ph-spinner animate-spin text-2xl mb-2"></i><br>
+                    Cargando catálogo oficial...
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('kokoro_client_token');
+            if (!token) {
+                window.location.href = '../../index.html';
+                return;
+            }
+
+            try {
+                const res = await fetch('../../api/client/catalog/list.php', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    renderCatalog(data.data.catalog);
+                } else if (res.status === 401) {
+                    logout();
+                } else {
+                    document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error: ${data.message}</div>`;
+                }
+            } catch (error) {
+                console.error('Error fetching catalog:', error);
+                document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error de conexión con el servidor.</div>`;
+            }
+        });
+
+        function renderCatalog(tests) {
+            const grid = document.getElementById('catalogGrid');
+            if (!tests || tests.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white overflow-hidden shadow sm:rounded-lg border border-gray-200 p-12 text-center text-gray-500">
+                        <i class="ph ph-books text-4xl mb-3 text-gray-300"></i>
+                        <p>No hay pruebas disponibles en el catálogo oficial de Kokoro por el momento.</p>
+                    </div>`;
+                return;
+            }
+
+            const getIconForCategory = (cat) => {
+                const lower = cat.toLowerCase();
+                if (lower.includes('emocional') || lower.includes('personalidad')) return 'ph-brain';
+                if (lower.includes('técnica') || lower.includes('lógica')) return 'ph-code';
+                if (lower.includes('idioma') || lower.includes('inglés')) return 'ph-translate';
+                return 'ph-exam';
+            };
+
+            grid.innerHTML = tests.map(t => `
+                <div class="bg-white overflow-hidden shadow sm:rounded-lg border border-gray-200 hover:border-black transition-colors flex flex-col h-full">
+                    <div class="px-4 py-5 sm:p-6 flex flex-col flex-1">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900 line-clamp-2">
+                                <i class="ph ${getIconForCategory(t.category)} mr-1 text-gray-500"></i> ${t.name}
+                            </h3>
+                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                                ${t.category}
+                            </span>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-500 flex-1">
+                            <p class="line-clamp-3">${t.description}</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-100 text-sm flex gap-4 text-gray-400">
+                            <span title="Duración Aprox."><i class="ph ph-clock"></i> ${t.durationMins || '?'} mins</span>
+                            <span title="Código Referencia"><i class="ph ph-barcode"></i> ${t.key}</span>
+                        </div>
+                        <div class="mt-5">
+                            <button type="button" class="text-sm font-semibold text-blue-600 hover:text-blue-500 w-full text-left" onclick="alert('Detalle no implementado: ${t.key}')">Ver Detalles &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function logout() {
+            localStorage.removeItem('kokoro_client_token');
+            window.location.href = '../../index.html';
+        }
+    </script>
+</body>
+
+</html>

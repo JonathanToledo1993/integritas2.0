@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollando Test...</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <header class="bg-black text-white h-14 flex items-center justify-between px-6 shadow">
+        <div class="font-bold flex items-center gap-2">
+            <div class="bg-white text-black px-2 rounded font-black">K</div> Evaluaciones
+        </div>
+        <div class="text-sm font-mono text-gray-300">
+            Tiempo Invertido: <span id="timerText">00:00</span>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-3xl mx-auto py-10 px-4" id="testContainer">
+        <!-- Progress Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-8">
+            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%" id="pBar"></div>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 text-center">
+
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Módulo de Resolución</h2>
+
+            <p class="text-gray-600 mb-8" id="qText">
+                ¿Qué comportamiento consideras más importante en un entorno de alta fricción laboral?
+            </p>
+
+            <div class="space-y-3" id="ansBox">
+                <button
+                    class="w-full text-left p-4 border rounded hover:border-black hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-black focus:outline-none">
+                    A) Delegar y observar.
+                </button>
+                <button
+                    class="w-full text-left p-4 border rounded hover:border-black hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-black focus:outline-none">
+                    B) Enfrentar frontalmente y mediar.
+                </button>
+            </div>
+
+            <!-- Botonera de flujo simulada para la demostración -->
+            <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
+                <button id="nextBtn"
+                    class="bg-black text-white px-6 py-2 rounded font-medium hover:bg-gray-800 transition shadow">
+                    Siguiente Pregunta
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <main class="flex-1 w-full max-w-3xl mx-auto py-10 px-4 hidden" id="successContainer">
+        <div class="bg-white p-12 rounded-lg shadow-sm border border-gray-200 text-center">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+                <!-- SVG Check -->
+                <svg class="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-2">¡Prueba Finalizada!</h2>
+            <p class="text-gray-600 mb-6">Tus respuestas han sido procesadas de forma segura y han sido entregadas al
+                reclutador.</p>
+            <p class="text-sm text-gray-400">Ya puedes cerrar esta pestaña y salir del navegador.</p>
+        </div>
+    </main>
+
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        if (!token) window.location.href = "index.html";
+
+        // Cronómetro UI
+        let s = 0;
+        setInterval(() => {
+            s++;
+            let m = Math.floor(s / 60).toString().padStart(2, '0');
+            let secs = (s % 60).toString().padStart(2, '0');
+            document.getElementById('timerText').textContent = `${m}:${secs}`;
+        }, 1000);
+
+        // Envío Falso a API Submit
+        document.getElementById('nextBtn').addEventListener('click', async () => {
+
+            const btn = document.getElementById('nextBtn');
+            btn.textContent = "Procesando...";
+            btn.disabled = true;
+
+            try {
+                // Post API Guardado (Quema el token)
+                const res = await fetch('../../api/candidate/submit.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token, answers: [{ q: 1, a: "B" }] })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || !data.success) {
+                    alert("Error guardando el examen: " + data.error);
+                    btn.textContent = "Re-intentar";
+                    btn.disabled = false;
+                    return;
+                }
+
+                // Show Success Template
+                document.getElementById('testContainer').classList.add('hidden');
+                document.getElementById('successContainer').classList.remove('hidden');
+
+            } catch (e) {
+                alert("Error de Red.");
+            }
+        });
+
+    </script>
+</body>
+
+</html>

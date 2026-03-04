@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postulantes | Kokoro Empresas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen sticky top-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200 gap-3">
+            <div class="w-8 h-8 bg-black text-white font-bold rounded flex items-center justify-center text-sm">K</div>
+            <span class="font-semibold text-lg tracking-tight text-black">Kokoro Clientes</span>
+        </div>
+
+        <div class="p-4 flex-1 overflow-y-auto">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-squares-four text-lg"></i> Dashboard
+                </a>
+                <a href="index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
+                    <i class="ph ph-users text-lg"></i> Postulantes
+                </a>
+                <a href="../perfiles/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
+            <nav class="space-y-1 mb-8">
+                <a href="../biblioteca/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
+                </a>
+                <a href="../crea/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
+                </a>
+                <a href="../digitaliza/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
+                </a>
+            </nav>
+
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <nav class="space-y-1">
+                <a href="../configuracion/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-gear text-lg"></i> Configuración
+                </a>
+            </nav>
+        </div>
+
+        <div class="border-t border-gray-200 p-4">
+            <button onclick="logout()"
+                class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
+                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+
+        <!-- Mobile Header -->
+        <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
+            <div class="font-bold flex items-center gap-2">
+                <div class="w-6 h-6 bg-black text-white rounded flex items-center justify-center text-xs">K</div>
+                Kokoro
+            </div>
+            <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between mb-8">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Postulantes
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-500">Maneja a los candidatos invitados y revisa sus estatus de
+                        prueba.</p>
+                </div>
+                <div class="mt-4 flex md:ml-4 md:mt-0 gap-3">
+                    <button type="button" onclick="window.location.href='../create_candidate.html'"
+                        class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">
+                        <i class="ph ph-paper-plane-tilt mr-2 text-lg"></i> Invitar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Candidates Data Table -->
+            <div id="candidatesContainer" class="bg-white shadow sm:rounded-lg overflow-hidden border border-gray-100">
+                <div class="p-6 text-center text-gray-500 py-12" id="candidatesLoading">
+                    <i class="ph ph-spinner animate-spin text-4xl mb-3 text-gray-300"></i>
+                    <p>Cargando postulantes...</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const token = localStorage.getItem('kokoro_client_token');
+        if (!token) window.location.href = '../../index.html';
+
+        document.addEventListener('DOMContentLoaded', fetchCandidates);
+
+        async function fetchCandidates() {
+            try {
+                const res = await fetch('../../api/client/candidates/list.php', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    renderCandidates(data.data.candidates);
+                } else if (res.status === 401) {
+                    logout();
+                } else {
+                    showError(data.message);
+                }
+            } catch (error) {
+                showError("No se pudo conectar con el servidor.");
+            }
+        }
+
+        function renderCandidates(candidates) {
+            const container = document.getElementById('candidatesContainer');
+
+            if (!candidates || candidates.length === 0) {
+                container.innerHTML = `
+                    <div class="p-12 text-center text-gray-500">
+                        <i class="ph ph-users text-4xl mb-3 text-gray-300"></i>
+                        <p>Aún no has invitado a ningún candidato.</p>
+                        <button onclick="window.location.href='../create_candidate.html'" class="mt-4 text-sm font-semibold text-blue-600 hover:text-blue-500">Enviar tu primera invitación &rarr;</button>
+                    </div>`;
+                return;
+            }
+
+            let tableHTML = `
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Postulante</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado de Examen</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha de Invitación</th>
+                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6"><span class="sr-only">Acciones</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+            `;
+
+            candidates.forEach(c => {
+                // Determine Status visually
+                let statusBadge = '';
+                let isExpired = new Date(c.expiresAt) < new Date();
+
+                if (c.usedAt) {
+                    statusBadge = `<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Finalizado</span>`;
+                } else if (isExpired) {
+                    statusBadge = `<span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">Expirado</span>`;
+                } else {
+                    statusBadge = `<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">Pendiente</span>`;
+                }
+
+                tableHTML += `
+                    <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                            ${c.name ? c.name : '<i>Buscando nombre...</i>'}<br>
+                            <span class="text-xs text-gray-500 font-normal">${c.email}</span>
+                        </td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${statusBadge}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            ${new Date(c.createdAt).toLocaleDateString()}
+                        </td>
+                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            ${c.usedAt ? `
+                                <button class="text-indigo-600 hover:text-indigo-900 mr-3" onclick="alert('Descargando reporte de ${c.email}')">PDF Reporte</button>
+                            ` : `
+                                <button class="text-gray-400 hover:text-gray-600" title="Copiar Link" onclick="copyLink('${c.token}')"><i class="ph ph-copy text-lg"></i></button>
+                            `}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `</tbody></table>`;
+            container.innerHTML = tableHTML;
+        }
+
+        function copyLink(token) {
+            const link = window.location.origin + '/candidate/index.html?token=' + token;
+            navigator.clipboard.writeText(link);
+            alert("¡Link mágico copiado al portapapeles!");
+        }
+
+        function showError(msg) {
+            document.getElementById('candidatesContainer').innerHTML = `<div class="p-8 text-center text-red-500">${msg}</div>`;
+        }
+
+        function logout() {
+            localStorage.removeItem('kokoro_client_token');
+            window.location.href = '../../index.html';
+        }
+    </script>
+</body>
+
+</html>
