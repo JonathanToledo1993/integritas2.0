@@ -114,81 +114,77 @@
             <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
         </header>
 
-        <main class="flex-1 overflow-y-auto w-full px-4 sm:px-8 py-8">
-            <div class="w-full max-w-7xl mx-auto">
-
-                <!-- Page Top White Block -->
-                <div
-                    class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div>
-                        <h2 class="text-3xl font-bold leading-7 text-gray-900 tracking-tight mb-2">
-                            Mis evaluaciones
-                        </h2>
-                        <p class="text-sm text-gray-500 font-medium">
-                            Gestiona tus procesos de evaluación, revisa su estado y realiza acciones rápidas sobre cada
-                            evaluación.
-                        </p>
-                    </div>
+        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="md:flex md:items-center md:justify-between mb-8">
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        Evaluaciones
+                    </h2>
+                    <p class="mt-2 text-sm text-gray-500">Gestiona tus procesos de evaluación, revisa su estado y
+                        realiza acciones rápidas sobre cada evaluación.</p>
+                </div>
+                <div class="mt-4 flex md:ml-4 md:mt-0 gap-3">
                     <button type="button" onclick="openCreateModal()"
-                        class="inline-flex items-center justify-center rounded-full bg-black px-6 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-gray-800 transition-colors shrink-0">
-                        + Crear evaluación
+                        class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">
+                        <i class="ph ph-plus-circle mr-2 text-lg"></i> Crear evaluación
                     </button>
                 </div>
-
-                <!-- Evaluaciones Tools Nav -->
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
-                    <div class="flex items-center gap-2 bg-gray-100 p-1 rounded-full">
-                        <button
-                            class="px-5 py-2 text-sm font-bold bg-black text-white rounded-full shadow-sm">Activas</button>
-                        <button
-                            class="px-5 py-2 text-sm font-bold text-gray-600 hover:text-black hover:bg-white rounded-full transition-colors">Archivadas</button>
-                    </div>
-
-                    <div class="relative w-full md:w-80">
-                        <i class="ph ph-magnifying-glass absolute left-4 top-3 text-gray-400"></i>
-                        <input type="text" placeholder="Buscar por nombre, creador o código"
-                            class="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-1 focus:ring-black placeholder-gray-400 bg-white">
-                    </div>
-                </div>
-
-                <!-- Table Container -->
-                <div class="bg-white shadow-sm sm:rounded-2xl border border-gray-200 overflow-x-auto w-full">
-                    <table class="min-w-full divide-y divide-gray-100">
-                        <thead class="bg-gray-50/50">
-                            <tr>
-                                <th scope="col"
-                                    class="py-4 pl-6 pr-3 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
-                                    #</th>
-                                <th scope="col"
-                                    class="px-3 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
-                                    Evaluación</th>
-                                <th scope="col"
-                                    class="px-3 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
-                                    Postulantes</th>
-                                <th scope="col"
-                                    class="px-3 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
-                                    Estado de los postulantes</th>
-                                <th scope="col"
-                                    class="px-3 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
-                                    Fechas</th>
-                                <th scope="col"
-                                    class="px-3 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80 pr-6">
-                                    Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 bg-white" id="evalGrid">
-                            <tr>
-                                <td colspan="6" class="p-12 text-center text-gray-500">
-                                    <i class="ph ph-spinner animate-spin text-4xl mb-3 text-gray-300 mx-auto"></i>
-                                    <p>Cargando evaluaciones...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
             </div>
-        </main>
+
+            <!-- Evaluaciones Tools Nav -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+                <div class="flex items-center gap-2 bg-gray-100 p-1 rounded-full">
+                    <button
+                        class="px-5 py-2 text-sm font-bold bg-black text-white rounded-full shadow-sm">Activas</button>
+                    <button
+                        class="px-5 py-2 text-sm font-bold text-gray-600 hover:text-black hover:bg-white rounded-full transition-colors">Archivadas</button>
+                </div>
+
+                <div class="relative w-full md:w-80">
+                    <i class="ph ph-magnifying-glass absolute left-4 top-3 text-gray-400"></i>
+                    <input type="text" placeholder="Buscar por nombre, creador o código"
+                        class="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-1 focus:ring-black placeholder-gray-400 bg-white">
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="bg-white shadow-sm sm:rounded-2xl border border-gray-200 overflow-x-auto w-full">
+                <table class="min-w-full divide-y divide-gray-100">
+                    <thead class="bg-gray-50/50">
+                        <tr>
+                            <th scope="col"
+                                class="py-4 pl-6 pr-3 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
+                                #</th>
+                            <th scope="col"
+                                class="px-3 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
+                                Evaluación</th>
+                            <th scope="col"
+                                class="px-3 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
+                                Postulantes</th>
+                            <th scope="col"
+                                class="px-3 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
+                                Estado de los postulantes</th>
+                            <th scope="col"
+                                class="px-3 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80">
+                                Fechas</th>
+                            <th scope="col"
+                                class="px-3 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50/80 pr-6">
+                                Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 bg-white" id="evalGrid">
+                        <tr>
+                            <td colspan="6" class="p-12 text-center text-gray-500">
+                                <i class="ph ph-spinner animate-spin text-4xl mb-3 text-gray-300 mx-auto"></i>
+                                <p>Cargando evaluaciones...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+    </main>
     </div>
 
     <!-- GLOBAL WIZARD: CREAR EVALUACIÓN -->
