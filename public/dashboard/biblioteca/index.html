@@ -9,6 +9,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Esconder scrollbar en chips */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 min-h-screen flex">
@@ -71,7 +96,7 @@
     </aside>
 
     <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col min-h-0 overflow-hidden">
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden relative">
 
         <!-- Mobile Header -->
         <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 md:hidden">
@@ -82,99 +107,443 @@
             <button class="text-gray-500"><i class="ph ph-list text-2xl"></i></button>
         </header>
 
-        <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="md:flex md:items-center md:justify-between mb-8">
-                <div class="min-w-0 flex-1">
+        <main class="flex-1 overflow-y-auto w-full px-4 sm:px-8 py-8">
+
+            <!-- Header Section -->
+            <div class="md:flex md:items-center md:justify-between mb-6">
+                <div class="flex-1 min-w-0">
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        Catálogo Oficial Kokoro
+                        Mis pruebas
                     </h2>
-                    <p class="mt-2 text-sm text-gray-500">Explora las pruebas prediseñadas por nuestros expertos
-                        psicólogos.</p>
+                    <p class="mt-2 text-sm text-gray-500">
+                        Las pruebas Integritas son creadas por expertos en la materia y están científicamente validadas.
+                    </p>
+                </div>
+                <div class="mt-4 flex md:ml-4 md:mt-0 gap-3 items-center">
+                    <div class="relative rounded-md shadow-sm">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="ph ph-magnifying-glass text-gray-400"></i>
+                        </div>
+                        <input type="text" id="searchInput"
+                            class="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                            placeholder="Buscar prueba" oninput="filterCatalog()">
+                    </div>
+                    <!-- Right side top button explicitly requested by user as global pattern -->
+                    <button type="button"
+                        class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
+                        onclick="window.location.href='../create_candidate.html'">
+                        + Crear evaluación
+                    </button>
                 </div>
             </div>
 
-            <div id="catalogGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Filter Chips -->
+            <div class="flex gap-2 overflow-x-auto no-scrollbar mb-8 pb-2" id="categoryChips">
+                <button type="button"
+                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-black text-white whitespace-nowrap"
+                    onclick="setCategory('Todas', this)">Todas las pruebas</button>
+                <button type="button"
+                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
+                    onclick="setCategory('Personalidad', this)">Personalidad</button>
+                <button type="button"
+                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
+                    onclick="setCategory('Inteligencia', this)">Inteligencia</button>
+                <button type="button"
+                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
+                    onclick="setCategory('Habilidad', this)">Habilidad</button>
+                <button type="button"
+                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
+                    onclick="setCategory('Técnicas', this)">Técnicas</button>
+            </div>
+
+            <!-- Grid -->
+            <div id="catalogGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 <div class="col-span-full py-12 text-center text-sm text-gray-500">
                     <i class="ph ph-spinner animate-spin text-2xl mb-2"></i><br>
                     Cargando catálogo oficial...
                 </div>
             </div>
 
+            <div id="noResultsMsg" class="hidden col-span-full py-12 text-center text-sm text-gray-500">
+                <i class="ph ph-magnifying-glass text-4xl mb-3 text-gray-300"></i>
+                <p>No se encontraron pruebas que coincidan con tu búsqueda.</p>
+            </div>
+
         </main>
     </div>
 
+    <!-- Modal "Ver Detalles" -->
+    <div id="detailsModal" class="relative z-50 hidden fade-in" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <!-- Close btn -->
+                    <button type="button" onclick="closeDetailsModal()"
+                        class="absolute top-4 right-4 text-gray-400 hover:text-gray-500">
+                        <i class="ph ph-x text-2xl"></i>
+                    </button>
+
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 class="text-2xl font-semibold leading-6 text-gray-900" id="modalTitle">Integridad</h3>
+                            <div class="mt-1">
+                                <span class="text-sm font-medium text-gray-500" id="modalCategory">Personalidad</span>
+                            </div>
+
+                            <div class="mt-6">
+                                <button type="button" id="btnPreview"
+                                    class="w-full inline-flex justify-center rounded-md bg-black px-3 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
+                                    onclick="startDemo()">
+                                    Previsualizar prueba
+                                </button>
+                            </div>
+
+                            <!-- Card Info -->
+                            <div class="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
+                                <h4 class="text-sm font-semibold text-gray-900">Descripción</h4>
+                                <p class="mt-2 text-sm text-gray-600" id="modalDescription">
+                                    Evalúa tendencias de comportamiento ético, honestidad, cumplimiento normativo y
+                                    riesgo conductual en el entorno laboral.
+                                </p>
+                            </div>
+
+                            <!-- Durations -->
+                            <div class="mt-6 flex flex-col gap-2 border-t border-gray-200 pt-4">
+                                <div class="flex items-center text-sm justify-between">
+                                    <span class="text-gray-600">Duración promedio:</span>
+                                    <span class="font-medium text-gray-900" id="modalAvgTime">20 minutos</span>
+                                </div>
+                                <div class="flex items-center text-sm justify-between">
+                                    <span class="text-gray-600">Duración máxima:</span>
+                                    <span class="font-medium text-gray-900" id="modalMaxTime">30 minutos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PREVISUALIZACION DE PRUEBA OVERLAY (SPA Demo) -->
+    <div id="demoOverlay" class="fixed inset-0 z-[60] bg-white hidden flex-col fade-in">
+        <!-- Topbar -->
+        <header class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white shrink-0">
+            <div class="font-semibold text-gray-900" id="demoTitle">Previsualización: Integridad</div>
+            <button onclick="abortDemo()"
+                class="text-sm font-medium text-gray-500 hover:text-black flex items-center gap-2">
+                <i class="ph ph-x-circle text-lg"></i> Salir de la demo
+            </button>
+        </header>
+
+        <!-- Main Body Simulator -->
+        <div class="flex-1 bg-gray-50 overflow-y-auto">
+            <div class="max-w-3xl mx-auto px-4 py-8 h-full flex flex-col pt-12">
+
+                <!-- Progress Header -->
+                <div id="demoContentBlock">
+                    <div class="flex justify-between text-sm font-medium text-gray-900 mb-2">
+                        <span id="demoQuestionCounter">Pregunta 1 de 5</span>
+                        <span id="demoPercentage">20%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-8">
+                        <div class="bg-black h-2 rounded-full transition-all duration-500" id="demoProgressBar"
+                            style="width: 20%"></div>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 fade-in" id="questionBox">
+                        <h2 class="text-xl font-medium text-gray-900 mb-6" id="demoQuestionText">¿En qué medida
+                            consideras importante cumplir con los compromisos laborales adquiridos?</h2>
+
+                        <div class="space-y-3" id="demoOptionsContainer">
+                            <!-- Options injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Navigation Footer -->
+                    <div class="mt-8 flex justify-end">
+                        <button type="button" id="demoNextBtn" disabled
+                            class="rounded-md bg-black px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                            onclick="nextDemoQuestion()">
+                            Siguiente
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Finished Graphic overlay -->
+                <div id="demoFinishedBlock" class="hidden text-center m-auto flex-col items-center max-w-lg">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ph ph-check-circle text-4xl text-green-600"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Fin de la demostración</h2>
+                    <p class="text-gray-600 mb-8 text-lg">Esta es una versión reducida de la prueba. La evaluación
+                        completa contiene muchas más preguntas, variables restrictivas de tiempo y análisis psicométrico
+                        algorítmico.</p>
+                    <button type="button"
+                        class="rounded-md bg-black px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
+                        onclick="abortDemo()">
+                        Volver a biblioteca
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <!-- Scripts -->
     <script>
+        let allTests = [];
+        let currentActiveCategory = 'Todas';
+
+        let demoState = {
+            testId: null,
+            questions: [],
+            currentIndex: 0
+        };
+
+        const token = localStorage.getItem('kokoro_client_token');
+
         document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('kokoro_client_token');
             if (!token) {
                 window.location.href = '../../login.html';
                 return;
             }
+            await fetchCatalog();
+        });
 
+        async function fetchCatalog() {
             try {
                 const res = await fetch('../../../api/client/catalog/list.php', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
                 const data = await res.json();
-
-                if (data.status === 'success') {
-                    renderCatalog(data.data.catalog);
+                if (data.status === 'success' || data.success) { // Fallback para ambos keys
+                    allTests = data.data.catalog;
+                    renderGrid(allTests);
                 } else if (res.status === 401) {
                     logout();
                 } else {
-                    document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error: ${data.message}</div>`;
+                    document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error: ${data.message || data.error}</div>`;
                 }
             } catch (error) {
                 console.error('Error fetching catalog:', error);
                 document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error de conexión con el servidor.</div>`;
             }
-        });
+        }
 
-        function renderCatalog(tests) {
+        function setCategory(cat, btnElement) {
+            currentActiveCategory = cat;
+
+            // Toggle visual state on chips
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                btn.className = "chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap";
+            });
+            btnElement.className = "chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-black text-white whitespace-nowrap";
+
+            filterCatalog();
+        }
+
+        function filterCatalog() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const filtered = allTests.filter(t => {
+                const matchesSearch = t.name.toLowerCase().includes(searchTerm) || t.description.toLowerCase().includes(searchTerm);
+                const matchesCat = currentActiveCategory === 'Todas' || t.category === currentActiveCategory;
+                return matchesSearch && matchesCat;
+            });
+
+            renderGrid(filtered);
+        }
+
+        function renderGrid(tests) {
             const grid = document.getElementById('catalogGrid');
+            const noRes = document.getElementById('noResultsMsg');
+
             if (!tests || tests.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full bg-white overflow-hidden shadow sm:rounded-lg border border-gray-200 p-12 text-center text-gray-500">
-                        <i class="ph ph-books text-4xl mb-3 text-gray-300"></i>
-                        <p>No hay pruebas disponibles en el catálogo oficial de Kokoro por el momento.</p>
-                    </div>`;
+                grid.innerHTML = '';
+                noRes.classList.remove('hidden');
                 return;
             }
 
-            const getIconForCategory = (cat) => {
-                const lower = cat.toLowerCase();
-                if (lower.includes('emocional') || lower.includes('personalidad')) return 'ph-brain';
-                if (lower.includes('técnica') || lower.includes('lógica')) return 'ph-code';
-                if (lower.includes('idioma') || lower.includes('inglés')) return 'ph-translate';
-                return 'ph-exam';
-            };
+            noRes.classList.add('hidden');
 
-            grid.innerHTML = tests.map(t => `
-                <div class="bg-white overflow-hidden shadow sm:rounded-lg border border-gray-200 hover:border-black transition-colors flex flex-col h-full">
-                    <div class="px-4 py-5 sm:p-6 flex flex-col flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-medium leading-6 text-gray-900 line-clamp-2">
-                                <i class="ph ${getIconForCategory(t.category)} mr-1 text-gray-500"></i> ${t.name}
-                            </h3>
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                ${t.category}
-                            </span>
+            grid.innerHTML = tests.map(t => {
+                // Determine max time logic. As requested: +10 mins or specific for the 5 tests.
+                let maxMins = parseInt(t.durationMins) + 5;
+                if (t.name.includes("16PF")) maxMins = 45;
+                else if (t.name.includes("Integridad") || t.name.includes("Estabilidad")) maxMins = t.durationMins + 5;
+
+                return `
+                <div class="bg-white rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full overflow-hidden group">
+                    <div class="p-6 flex flex-col flex-1 relative">
+                        <!-- Tiny Category tag above title -->
+                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">${t.category}</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 leading-tight">${t.name}</h3>
+                        
+                        <p class="mt-2 text-sm text-gray-600 flex-1 line-clamp-2">${t.description}</p>
+                        
+                        <div class="mt-6 flex items-center text-sm font-medium text-gray-700">
+                            <i class="ph ph-clock mr-2 text-gray-400"></i> ${t.durationMins} minutos
                         </div>
-                        <div class="mt-2 text-sm text-gray-500 flex-1">
-                            <p class="line-clamp-3">${t.description}</p>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-gray-100 text-sm flex gap-4 text-gray-400">
-                            <span title="Duración Aprox."><i class="ph ph-clock"></i> ${t.durationMins || '?'} mins</span>
-                            <span title="Código Referencia"><i class="ph ph-barcode"></i> ${t.key}</span>
-                        </div>
-                        <div class="mt-5">
-                            <button type="button" class="text-sm font-semibold text-blue-600 hover:text-blue-500 w-full text-left" onclick="alert('Detalle no implementado: ${t.key}')">Ver Detalles &rarr;</button>
+                        
+                        <div class="mt-6">
+                            <button type="button" class="w-full justify-center inline-flex items-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 transition-colors" 
+                                onclick="openDetailsModal('${t.id}', '${t.name.replace(/'/g, "\\'")}', '${t.category}', '${t.description.replace(/'/g, "\\'")}', ${t.durationMins}, ${maxMins})">
+                                Ver detalles
+                            </button>
                         </div>
                     </div>
                 </div>
+                `;
+            }).join('');
+        }
+
+        function openDetailsModal(id, name, cat, desc, avg, max) {
+            demoState.testId = id; // Store for preview
+
+            document.getElementById('modalTitle').textContent = name;
+            document.getElementById('modalCategory').textContent = cat;
+            document.getElementById('modalDescription').textContent = desc;
+            document.getElementById('modalAvgTime').textContent = `${avg} minutos`;
+            document.getElementById('modalMaxTime').textContent = `${max} minutos`;
+
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // DEMO TEST SIMULATOR LOGIC
+        // ==========================================
+        async function startDemo() {
+            const btn = document.getElementById('btnPreview');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="ph ph-spinner animate-spin mr-2"></i> Cargando...`;
+            btn.disabled = true;
+
+            try {
+                // Fetch the 5 questions payload from our new server endpoint
+                const res = await fetch(`../../../api/client/catalog/demo.php?testId=${demoState.testId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                if (data.status === 'success' || data.success) {
+                    demoState.questions = data.data.questions;
+                    demoState.currentIndex = 0;
+
+                    document.getElementById('demoTitle').textContent = `Previsualización: ${data.data.test.name}`;
+
+                    // Setup UI Blocks
+                    document.getElementById('demoFinishedBlock').classList.add('hidden');
+                    document.getElementById('demoContentBlock').classList.remove('hidden');
+
+                    // Show Overlay
+                    document.getElementById('detailsModal').classList.add('hidden');
+                    document.getElementById('demoOverlay').classList.remove('hidden');
+                    document.getElementById('demoOverlay').classList.add('flex');
+
+                    // Paint First Question
+                    renderDemoQuestion();
+
+                } else {
+                    alert("Error cargando demo: " + (data.message || data.error));
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Hubo un error contactando el servidor para la demostración.");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function renderDemoQuestion() {
+            const q = demoState.questions[demoState.currentIndex];
+            const total = demoState.questions.length; // usually 5
+
+            // Update Headers
+            document.getElementById('demoQuestionCounter').textContent = `Pregunta ${demoState.currentIndex + 1} de ${total}`;
+            const percentage = Math.round(((demoState.currentIndex) / total) * 100);
+
+            // if it's the first question, it's 20%
+            const displayPercentage = percentage === 0 ? Math.round(100 / total) : percentage + Math.round(100 / total);
+            document.getElementById('demoPercentage').textContent = `${displayPercentage}%`;
+            document.getElementById('demoProgressBar').style.width = `${displayPercentage}%`;
+
+            // Re-trigger animation on box
+            const box = document.getElementById('questionBox');
+            box.classList.remove('fade-in');
+            void box.offsetWidth;
+            box.classList.add('fade-in');
+
+            // Text
+            document.getElementById('demoQuestionText').textContent = q.questionText;
+
+            // Options
+            const optsContainer = document.getElementById('demoOptionsContainer');
+            // Disable button
+            const nextBtn = document.getElementById('demoNextBtn');
+            nextBtn.disabled = true;
+
+            optsContainer.innerHTML = q.options.map((opt, idx) => `
+                <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-black transition-colors radio-label group">
+                    <input type="radio" name="demoRadioGroup" value="${opt.id}" class="w-4 h-4 text-black focus:ring-black border-gray-300" onchange="enableNextBtn(this)">
+                    <span class="ml-3 text-sm text-gray-700 font-medium group-hover:text-black">${opt.text}</span>
+                </label>
             `).join('');
+
+            if (demoState.currentIndex === total - 1) {
+                nextBtn.textContent = "Finalizar";
+            } else {
+                nextBtn.textContent = "Siguiente";
+            }
+        }
+
+        function enableNextBtn(radioElem) {
+            // Un-highlight all
+            document.querySelectorAll('.radio-label').forEach(lbl => {
+                lbl.classList.remove('border-black', 'bg-gray-50', 'ring-1', 'ring-black');
+            });
+            // Highlight selected
+            radioElem.closest('.radio-label').classList.add('border-black', 'bg-gray-50', 'ring-1', 'ring-black');
+
+            document.getElementById('demoNextBtn').disabled = false;
+        }
+
+        function nextDemoQuestion() {
+            demoState.currentIndex++;
+            if (demoState.currentIndex >= demoState.questions.length) {
+                // Finish
+                showDemoFinished();
+            } else {
+                renderDemoQuestion();
+            }
+        }
+
+        function showDemoFinished() {
+            document.getElementById('demoContentBlock').classList.add('hidden');
+
+            const finalBlock = document.getElementById('demoFinishedBlock');
+            finalBlock.classList.remove('hidden');
+            finalBlock.classList.add('flex'); // Add flex back if it was removed
+        }
+
+        function abortDemo() {
+            document.getElementById('demoOverlay').classList.add('hidden');
+            document.getElementById('demoOverlay').classList.remove('flex');
+            // Reset state
+            demoState.currentIndex = 0;
+            demoState.questions = [];
+            demoState.testId = null;
         }
 
         function logout() {
