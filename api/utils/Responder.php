@@ -8,6 +8,9 @@ class Responder
      */
     public static function setupCORS()
     {
+        // Fuerza a PHP a no imprimir errores como HTML para no romper los parseos JSON
+        ini_set('display_errors', '0');
+
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
@@ -29,6 +32,7 @@ class Responder
         http_response_code($status);
         echo json_encode([
             "success" => true,
+            "status" => "success",
             "message" => $message,
             "data" => $data
         ]);
@@ -43,7 +47,9 @@ class Responder
         http_response_code($status);
         echo json_encode([
             "success" => false,
-            "error" => $message
+            "status" => "error",
+            "error" => $message,
+            "message" => $message
         ]);
         exit();
     }
