@@ -33,6 +33,73 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Custom Colors for chips matching Mockup 1 */
+        .chip-todas {
+            border: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        .chip-todas.active {
+            background-color: #f3f4f6;
+            border-color: #f3f4f6;
+            font-weight: 600;
+        }
+
+        .chip-inteligencia {
+            border: 1px solid #c084fc;
+            color: #a855f7;
+        }
+
+        .chip-inteligencia.active {
+            background-color: #f3e8ff;
+            border-color: #c084fc;
+            font-weight: 600;
+        }
+
+        .chip-personalidad {
+            border: 1px solid #7dd3fc;
+            color: #38bdf8;
+        }
+
+        .chip-personalidad.active {
+            background-color: #e0f2fe;
+            border-color: #7dd3fc;
+            font-weight: 600;
+        }
+
+        .chip-habilidad {
+            border: 1px solid #86efac;
+            color: #4ade80;
+        }
+
+        .chip-habilidad.active {
+            background-color: #dcfce3;
+            border-color: #86efac;
+            font-weight: 600;
+        }
+
+        .chip-tecnicas {
+            border: 1px solid #fdba74;
+            color: #fb923c;
+        }
+
+        .chip-tecnicas.active {
+            background-color: #ffedd5;
+            border-color: #fdba74;
+            font-weight: 600;
+        }
+
+        .chip-personalizadas {
+            border: 1px solid #fcd34d;
+            color: #fbbf24;
+        }
+
+        .chip-personalizadas.active {
+            background-color: #fef3c7;
+            border-color: #fcd34d;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -109,62 +176,69 @@
 
         <main class="flex-1 overflow-y-auto w-full px-4 sm:px-8 py-8">
 
-            <!-- Header Section -->
-            <div class="md:flex md:items-center md:justify-between mb-6">
-                <div class="flex-1 min-w-0">
-                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        Mis pruebas
-                    </h2>
-                    <p class="mt-2 text-sm text-gray-500">
-                        Las pruebas Integritas son creadas por expertos en la materia y están científicamente validadas.
-                    </p>
-                </div>
-                <div class="mt-4 flex md:ml-4 md:mt-0 gap-3 items-center">
-                    <div class="relative rounded-md shadow-sm">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="ph ph-magnifying-glass text-gray-400"></i>
-                        </div>
-                        <input type="text" id="searchInput"
-                            class="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
-                            placeholder="Buscar prueba" oninput="filterCatalog()">
+            <!-- Styled White Card Top Block (Per mock 1) -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8 w-full max-w-5xl">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div class="flex-1">
+                        <h2
+                            class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                            Mis pruebas
+                        </h2>
+                        <p class="mt-2 text-sm text-gray-500">
+                            Las pruebas Integritas son creadas por expertos en la materia y están científicamente
+                            validadas.
+                        </p>
                     </div>
-                    <!-- Right side top button explicitly requested by user as global pattern -->
+                    <div class="w-full md:w-72">
+                        <div class="relative rounded-full shadow-sm">
+                            <input type="text" id="searchInput"
+                                class="block w-full rounded-full border border-gray-200 py-2.5 pl-4 pr-10 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 sm:text-sm"
+                                placeholder="Buscar prueba" oninput="filterCatalog()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Chips -->
+                <div class="flex gap-3 overflow-x-auto no-scrollbar mt-6 pt-2" id="categoryChips">
                     <button type="button"
-                        class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
-                        onclick="window.location.href='../create_candidate.html'">
-                        + Crear evaluación
-                    </button>
+                        class="chip-btn chip-todas active px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors"
+                        onclick="setCategory('Todas', this, 'chip-todas')">Todas las pruebas</button>
+                    <button type="button"
+                        class="chip-btn chip-inteligencia px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
+                        onclick="setCategory('Inteligencia', this, 'chip-inteligencia')">Inteligencia</button>
+                    <button type="button"
+                        class="chip-btn chip-personalidad px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
+                        onclick="setCategory('Personalidad', this, 'chip-personalidad')">Personalidad</button>
+                    <button type="button"
+                        class="chip-btn chip-habilidad px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
+                        onclick="setCategory('Habilidad', this, 'chip-habilidad')">Habilidad</button>
+                    <button type="button"
+                        class="chip-btn chip-tecnicas px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
+                        onclick="setCategory('Técnicas', this, 'chip-tecnicas')">Técnicas</button>
+                    <button type="button"
+                        class="chip-btn chip-personalizadas px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
+                        onclick="setCategory('Personalizadas', this, 'chip-personalizadas')">Personalizadas</button>
                 </div>
             </div>
 
-            <!-- Filter Chips -->
-            <div class="flex gap-2 overflow-x-auto no-scrollbar mb-8 pb-2" id="categoryChips">
+            <!-- Header Create Eval button -->
+            <div class="flex justify-end mb-6 max-w-5xl">
                 <button type="button"
-                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-black text-white whitespace-nowrap"
-                    onclick="setCategory('Todas', this)">Todas las pruebas</button>
-                <button type="button"
-                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
-                    onclick="setCategory('Personalidad', this)">Personalidad</button>
-                <button type="button"
-                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
-                    onclick="setCategory('Inteligencia', this)">Inteligencia</button>
-                <button type="button"
-                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
-                    onclick="setCategory('Habilidad', this)">Habilidad</button>
-                <button type="button"
-                    class="chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap"
-                    onclick="setCategory('Técnicas', this)">Técnicas</button>
+                    class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
+                    onclick="window.location.href='../create_candidate.html'">
+                    + Crear evaluación
+                </button>
             </div>
 
             <!-- Grid -->
-            <div id="catalogGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div id="catalogGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 max-w-5xl">
                 <div class="col-span-full py-12 text-center text-sm text-gray-500">
                     <i class="ph ph-spinner animate-spin text-2xl mb-2"></i><br>
                     Cargando catálogo oficial...
                 </div>
             </div>
 
-            <div id="noResultsMsg" class="hidden col-span-full py-12 text-center text-sm text-gray-500">
+            <div id="noResultsMsg" class="hidden col-span-full py-12 text-center text-sm text-gray-500 max-w-5xl">
                 <i class="ph ph-magnifying-glass text-4xl mb-3 text-gray-300"></i>
                 <p>No se encontraron pruebas que coincidan con tu búsqueda.</p>
             </div>
@@ -172,54 +246,55 @@
         </main>
     </div>
 
-    <!-- Modal "Ver Detalles" -->
+    <!-- Modal "Ver Detalles" (Per mock 2) -->
     <div id="detailsModal" class="relative z-50 hidden fade-in" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div
-                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl px-8 py-8">
                     <!-- Close btn -->
                     <button type="button" onclick="closeDetailsModal()"
-                        class="absolute top-4 right-4 text-gray-400 hover:text-gray-500">
-                        <i class="ph ph-x text-2xl"></i>
+                        class="absolute top-6 right-6 flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 text-gray-400 hover:text-gray-500 hover:bg-gray-50 transition-colors">
+                        <i class="ph ph-x"></i>
                     </button>
 
-                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                            <h3 class="text-2xl font-semibold leading-6 text-gray-900" id="modalTitle">Integridad</h3>
-                            <div class="mt-1">
-                                <span class="text-sm font-medium text-gray-500" id="modalCategory">Personalidad</span>
-                            </div>
+                    <div class="mt-2 text-left">
+                        <div class="flex items-center gap-2 mb-1">
+                            <!-- Small blue dot icon representation -->
+                            <div class="w-3 h-3 bg-blue-300 rounded-sm"></div>
+                            <h3 class="text-xl font-bold leading-6 text-gray-900" id="modalTitle">Integridad</h3>
+                        </div>
+                        <p class="text-sm font-medium text-[#7a889b]" id="modalCategory">Personalidad</p>
 
-                            <div class="mt-6">
-                                <button type="button" id="btnPreview"
-                                    class="w-full inline-flex justify-center rounded-md bg-black px-3 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
-                                    onclick="startDemo()">
-                                    Previsualizar prueba
-                                </button>
-                            </div>
+                        <p class="mt-4 text-sm text-[#4d5b7c] font-medium" id="modalSummary">
+                            Mide tendencias de comportamiento ético y legal en el entorno laboral, incluyendo honestidad
+                            y responsabilidad.
+                        </p>
 
-                            <!-- Card Info -->
-                            <div class="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
-                                <h4 class="text-sm font-semibold text-gray-900">Descripción</h4>
-                                <p class="mt-2 text-sm text-gray-600" id="modalDescription">
-                                    Evalúa tendencias de comportamiento ético, honestidad, cumplimiento normativo y
-                                    riesgo conductual en el entorno laboral.
-                                </p>
-                            </div>
+                        <div class="mt-8 mb-8">
+                            <button type="button" id="btnPreview"
+                                class="w-full inline-flex justify-center rounded-xl bg-black px-3 py-3.5 text-base font-semibold text-white shadow-sm hover:bg-gray-800 transition-colors"
+                                onclick="startDemo()">
+                                Previsualizar prueba
+                            </button>
+                        </div>
+
+                        <!-- Card Info Bordered -->
+                        <div class="border border-gray-200 rounded-xl p-5">
+                            <h4 class="text-sm font-bold text-gray-900 mb-2">Descripcion</h4>
+                            <p class="text-sm text-gray-700" id="modalDescription">
+                                Mide tendencias de comportamiento ético y legal en el entorno laboral, incluyendo
+                                honestidad y responsabilidad.
+                            </p>
 
                             <!-- Durations -->
-                            <div class="mt-6 flex flex-col gap-2 border-t border-gray-200 pt-4">
-                                <div class="flex items-center text-sm justify-between">
-                                    <span class="text-gray-600">Duración promedio:</span>
-                                    <span class="font-medium text-gray-900" id="modalAvgTime">20 minutos</span>
-                                </div>
-                                <div class="flex items-center text-sm justify-between">
-                                    <span class="text-gray-600">Duración máxima:</span>
-                                    <span class="font-medium text-gray-900" id="modalMaxTime">30 minutos</span>
-                                </div>
+                            <div class="mt-6 flex flex-col gap-1">
+                                <p class="text-sm text-[#7a889b]">Duracion promedio: <span id="modalAvgTime">20
+                                        mins</span></p>
+                                <p class="text-sm text-[#7a889b]">Duracion maxima: <span id="modalMaxTime">30
+                                        mins</span></p>
                             </div>
                         </div>
                     </div>
@@ -228,68 +303,73 @@
         </div>
     </div>
 
-    <!-- PREVISUALIZACION DE PRUEBA OVERLAY (SPA Demo) -->
-    <div id="demoOverlay" class="fixed inset-0 z-[60] bg-white hidden flex-col fade-in">
-        <!-- Topbar -->
-        <header class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white shrink-0">
-            <div class="font-semibold text-gray-900" id="demoTitle">Previsualización: Integridad</div>
-            <button onclick="abortDemo()"
-                class="text-sm font-medium text-gray-500 hover:text-black flex items-center gap-2">
-                <i class="ph ph-x-circle text-lg"></i> Salir de la demo
-            </button>
-        </header>
+    <!-- PREVISUALIZACION DE PRUEBA OVERLAY (Per mock 3) -->
+    <div id="demoOverlay" class="fixed inset-0 z-[60] bg-[#f8fafc] hidden flex-col fade-in">
+        <!-- Main Form Container -->
+        <div class="flex-1 overflow-y-auto flex justify-center py-10 px-4">
+            <div
+                class="w-full max-w-5xl bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-fit min-h-[500px]">
 
-        <!-- Main Body Simulator -->
-        <div class="flex-1 bg-gray-50 overflow-y-auto">
-            <div class="max-w-3xl mx-auto px-4 py-8 h-full flex flex-col pt-12">
-
-                <!-- Progress Header -->
-                <div id="demoContentBlock">
-                    <div class="flex justify-between text-sm font-medium text-gray-900 mb-2">
-                        <span id="demoQuestionCounter">Pregunta 1 de 5</span>
-                        <span id="demoPercentage">20%</span>
+                <!-- Progress Header Row -->
+                <div class="px-10 py-6 border-b border-gray-100 shrink-0">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-bold text-gray-800" id="demoQuestionCounter">Pregunta 1 de 5</span>
+                        <span class="text-xs font-semibold text-gray-500" id="demoPercentage">20%</span>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-8">
-                        <div class="bg-black h-2 rounded-full transition-all duration-500" id="demoProgressBar"
-                            style="width: 20%"></div>
+                    <div class="w-full bg-[#e2e8f0] rounded-full h-2">
+                        <div class="bg-[#1e293b] h-2 rounded-full transition-all duration-500 shadow-sm"
+                            id="demoProgressBar" style="width: 20%"></div>
                     </div>
+                </div>
 
-                    <!-- Question Container -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 fade-in" id="questionBox">
-                        <h2 class="text-xl font-medium text-gray-900 mb-6" id="demoQuestionText">¿En qué medida
-                            consideras importante cumplir con los compromisos laborales adquiridos?</h2>
+                <!-- Content Split Grid (Question Left, Options Right) -->
+                <div id="demoContentBlock" class="flex-1 flex flex-col pt-8">
+                    <div class="px-10 grid grid-cols-1 md:grid-cols-12 gap-12 flex-1">
+                        <!-- Left Col: Question -->
+                        <div class="md:col-span-5 fade-in" id="questionBox">
+                            <h2 class="text-2xl font-semibold text-gray-900 leading-snug tracking-tight pr-4"
+                                id="demoQuestionText">¿Cuándo consideras apropiado informar a tu equipo de los errores o
+                                fallas críticas que encuentres?</h2>
+                        </div>
 
-                        <div class="space-y-3" id="demoOptionsContainer">
-                            <!-- Options injected here -->
+                        <!-- Right Col: Options -->
+                        <div class="md:col-span-7 flex flex-col">
+                            <p class="text-sm font-medium text-gray-600 mb-4">Selecciona una respuesta:</p>
+                            <div class="space-y-3" id="demoOptionsContainer">
+                                <!-- Options injected here -->
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Navigation Footer -->
-                    <div class="mt-8 flex justify-end">
+                    <!-- Footer Buttons inside the white card -->
+                    <div class="px-10 py-8 mt-auto flex justify-end gap-3 shrink-0">
+                        <button type="button"
+                            class="rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 transition-colors"
+                            onclick="abortDemo()">
+                            Anterior
+                        </button>
                         <button type="button" id="demoNextBtn" disabled
-                            class="rounded-md bg-black px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                            class="rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                             onclick="nextDemoQuestion()">
                             Siguiente
                         </button>
                     </div>
                 </div>
 
-                <!-- Finished Graphic overlay -->
-                <div id="demoFinishedBlock" class="hidden text-center m-auto flex-col items-center max-w-lg">
+                <!-- Finished Screen -->
+                <div id="demoFinishedBlock" class="hidden text-center m-auto flex-col items-center max-w-lg p-12">
                     <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="ph ph-check-circle text-4xl text-green-600"></i>
                     </div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Fin de la demostración</h2>
                     <p class="text-gray-600 mb-8 text-lg">Esta es una versión reducida de la prueba. La evaluación
-                        completa contiene muchas más preguntas, variables restrictivas de tiempo y análisis psicométrico
-                        algorítmico.</p>
+                        completa contiene más preguntas y análisis psicométrico.</p>
                     <button type="button"
-                        class="rounded-md bg-black px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
+                        class="rounded-full bg-black px-8 py-3 text-sm font-semibold text-white hover:bg-gray-800"
                         onclick="abortDemo()">
                         Volver a biblioteca
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -302,6 +382,7 @@
 
         let demoState = {
             testId: null,
+            isCustom: 0,
             questions: [],
             currentIndex: 0
         };
@@ -318,6 +399,7 @@
 
         async function fetchCatalog() {
             try {
+                // Pointing to fixing relative route correctly up 3 levels
                 const res = await fetch('../../../api/client/catalog/list.php', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -337,14 +419,20 @@
             }
         }
 
-        function setCategory(cat, btnElement) {
+        function setCategory(cat, btnElement, cssClassPrefix) {
             currentActiveCategory = cat;
 
-            // Toggle visual state on chips
+            // Toggle visual state on chips removing 'active' class
             document.querySelectorAll('.chip-btn').forEach(btn => {
-                btn.className = "chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 whitespace-nowrap";
+                btn.classList.remove('active');
+                if (!btn.classList.contains('bg-white') && !btn.classList.contains('chip-todas')) {
+                    btn.classList.add('bg-white');
+                }
             });
-            btnElement.className = "chip-btn px-4 py-1.5 rounded-full text-sm font-medium bg-black text-white whitespace-nowrap";
+
+            // Activate selected
+            btnElement.classList.add('active');
+            btnElement.classList.remove('bg-white');
 
             filterCatalog();
         }
@@ -353,7 +441,7 @@
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
 
             const filtered = allTests.filter(t => {
-                const matchesSearch = t.name.toLowerCase().includes(searchTerm) || t.description.toLowerCase().includes(searchTerm);
+                const matchesSearch = t.name.toLowerCase().includes(searchTerm) || (t.description && t.description.toLowerCase().includes(searchTerm));
                 const matchesCat = currentActiveCategory === 'Todas' || t.category === currentActiveCategory;
                 return matchesSearch && matchesCat;
             });
@@ -374,27 +462,28 @@
             noRes.classList.add('hidden');
 
             grid.innerHTML = tests.map(t => {
-                // Determine max time logic. As requested: +10 mins or specific for the 5 tests.
-                let maxMins = parseInt(t.durationMins) + 5;
+                let maxMins = parseInt(t.durationMins || 20) + 5;
                 if (t.name.includes("16PF")) maxMins = 45;
-                else if (t.name.includes("Integridad") || t.name.includes("Estabilidad")) maxMins = t.durationMins + 5;
+                else if (t.name.includes("Integridad") || t.name.includes("Estabilidad")) maxMins = parseInt(t.durationMins) + 10;
+
+                const safeName = (t.name || '').replace(/'/g, "\\'");
+                const safeDesc = (t.description || '').replace(/'/g, "\\'");
 
                 return `
                 <div class="bg-white rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow flex flex-col h-full overflow-hidden group">
                     <div class="p-6 flex flex-col flex-1 relative">
-                        <!-- Tiny Category tag above title -->
-                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">${t.category}</span>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 leading-tight">${t.name}</h3>
+                        <h3 class="text-lg font-bold text-gray-900 mb-1 leading-tight">${t.name}</h3>
+                        <span class="text-xs font-semibold text-[#8a98ac] mb-3 block">${t.category}</span>
                         
-                        <p class="mt-2 text-sm text-gray-600 flex-1 line-clamp-2">${t.description}</p>
+                        <p class="mt-2 text-sm text-gray-600 flex-1 line-clamp-2">${t.description || 'Prueba personalizada construida digitalmente.'}</p>
                         
-                        <div class="mt-6 flex items-center text-sm font-medium text-gray-700">
-                            <i class="ph ph-clock mr-2 text-gray-400"></i> ${t.durationMins} minutos
+                        <div class="mt-4 flex items-center text-sm font-medium text-gray-700">
+                            ${t.durationMins || '?'} minutos
                         </div>
                         
                         <div class="mt-6">
                             <button type="button" class="w-full justify-center inline-flex items-center rounded-lg bg-black px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-800 transition-colors" 
-                                onclick="openDetailsModal('${t.id}', '${t.name.replace(/'/g, "\\'")}', '${t.category}', '${t.description.replace(/'/g, "\\'")}', ${t.durationMins}, ${maxMins})">
+                                onclick="openDetailsModal('${t.id}', '${safeName}', '${t.category}', '${safeDesc}', ${t.durationMins || 20}, ${maxMins}, ${t.isCustom || 0})">
                                 Ver detalles
                             </button>
                         </div>
@@ -404,14 +493,16 @@
             }).join('');
         }
 
-        function openDetailsModal(id, name, cat, desc, avg, max) {
-            demoState.testId = id; // Store for preview
+        function openDetailsModal(id, name, cat, desc, avg, max, isCustom) {
+            demoState.testId = id;
+            demoState.isCustom = isCustom;
 
             document.getElementById('modalTitle').textContent = name;
             document.getElementById('modalCategory').textContent = cat;
-            document.getElementById('modalDescription').textContent = desc;
-            document.getElementById('modalAvgTime').textContent = `${avg} minutos`;
-            document.getElementById('modalMaxTime').textContent = `${max} minutos`;
+            document.getElementById('modalSummary').textContent = desc || 'Prueba técnica construida por reclutamiento.';
+            document.getElementById('modalDescription').textContent = desc || '-';
+            document.getElementById('modalAvgTime').textContent = `${avg} mins`;
+            document.getElementById('modalMaxTime').textContent = `${max} mins`;
 
             document.getElementById('detailsModal').classList.remove('hidden');
         }
@@ -420,18 +511,15 @@
             document.getElementById('detailsModal').classList.add('hidden');
         }
 
-        // ==========================================
-        // DEMO TEST SIMULATOR LOGIC
-        // ==========================================
         async function startDemo() {
             const btn = document.getElementById('btnPreview');
             const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="ph ph-spinner animate-spin mr-2"></i> Cargando...`;
+            btn.innerHTML = `<i class="ph ph-spinner animate-spin"></i> Cargando...`;
             btn.disabled = true;
 
             try {
-                // Fetch the 5 questions payload from our new server endpoint
-                const res = await fetch(`../../../api/client/catalog/demo.php?testId=${demoState.testId}`, {
+                // Valid url call to root API -> /api/client/catalog/demo.php
+                const res = await fetch(`../../../api/client/catalog/demo.php?testId=${demoState.testId}&isCustom=${demoState.isCustom}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -440,18 +528,16 @@
                     demoState.questions = data.data.questions;
                     demoState.currentIndex = 0;
 
-                    document.getElementById('demoTitle').textContent = `Previsualización: ${data.data.test.name}`;
-
-                    // Setup UI Blocks
+                    // Show Simulator Block
                     document.getElementById('demoFinishedBlock').classList.add('hidden');
                     document.getElementById('demoContentBlock').classList.remove('hidden');
+                    document.getElementById('demoContentBlock').classList.add('flex');
 
-                    // Show Overlay
+                    // Toggle Views
                     document.getElementById('detailsModal').classList.add('hidden');
                     document.getElementById('demoOverlay').classList.remove('hidden');
                     document.getElementById('demoOverlay').classList.add('flex');
 
-                    // Paint First Question
                     renderDemoQuestion();
 
                 } else {
@@ -459,7 +545,7 @@
                 }
             } catch (err) {
                 console.error(err);
-                alert("Hubo un error contactando el servidor para la demostración.");
+                alert("Hubo un error de conexión con el servidor IA.");
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
@@ -468,36 +554,38 @@
 
         function renderDemoQuestion() {
             const q = demoState.questions[demoState.currentIndex];
-            const total = demoState.questions.length; // usually 5
+            const total = demoState.questions.length;
 
-            // Update Headers
             document.getElementById('demoQuestionCounter').textContent = `Pregunta ${demoState.currentIndex + 1} de ${total}`;
             const percentage = Math.round(((demoState.currentIndex) / total) * 100);
-
-            // if it's the first question, it's 20%
             const displayPercentage = percentage === 0 ? Math.round(100 / total) : percentage + Math.round(100 / total);
+
             document.getElementById('demoPercentage').textContent = `${displayPercentage}%`;
             document.getElementById('demoProgressBar').style.width = `${displayPercentage}%`;
 
-            // Re-trigger animation on box
+            // Animation reset
             const box = document.getElementById('questionBox');
             box.classList.remove('fade-in');
             void box.offsetWidth;
             box.classList.add('fade-in');
 
-            // Text
             document.getElementById('demoQuestionText').textContent = q.questionText;
 
-            // Options
+            // Options Mockup match (Rounded thin gray border box with circles)
             const optsContainer = document.getElementById('demoOptionsContainer');
-            // Disable button
             const nextBtn = document.getElementById('demoNextBtn');
             nextBtn.disabled = true;
 
-            optsContainer.innerHTML = q.options.map((opt, idx) => `
-                <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 hover:border-black transition-colors radio-label group">
-                    <input type="radio" name="demoRadioGroup" value="${opt.id}" class="w-4 h-4 text-black focus:ring-black border-gray-300" onchange="enableNextBtn(this)">
-                    <span class="ml-3 text-sm text-gray-700 font-medium group-hover:text-black">${opt.text}</span>
+            let safeOptions = q.options;
+            if (!safeOptions || safeOptions.length === 0) {
+                safeOptions = [{ id: 99, text: "Esta prueba no contiene preguntas legibles." }];
+                nextBtn.disabled = false;
+            }
+
+            optsContainer.innerHTML = safeOptions.map((opt, idx) => `
+                <label class="flex items-center px-4 py-3.5 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors radio-label group mb-3">
+                    <input type="radio" name="demoRadioGroup" value="${opt.id}" class="w-5 h-5 text-black border-gray-300 focus:ring-black accent-black" onchange="enableNextBtn(this)">
+                    <span class="ml-3 text-sm text-[#475569] group-hover:text-black">${opt.text}</span>
                 </label>
             `).join('');
 
@@ -509,20 +597,17 @@
         }
 
         function enableNextBtn(radioElem) {
-            // Un-highlight all
             document.querySelectorAll('.radio-label').forEach(lbl => {
-                lbl.classList.remove('border-black', 'bg-gray-50', 'ring-1', 'ring-black');
+                lbl.classList.remove('border-gray-800');
             });
-            // Highlight selected
-            radioElem.closest('.radio-label').classList.add('border-black', 'bg-gray-50', 'ring-1', 'ring-black');
-
+            // Just slightly darken border to acknowledge
+            radioElem.closest('.radio-label').classList.add('border-gray-800');
             document.getElementById('demoNextBtn').disabled = false;
         }
 
         function nextDemoQuestion() {
             demoState.currentIndex++;
             if (demoState.currentIndex >= demoState.questions.length) {
-                // Finish
                 showDemoFinished();
             } else {
                 renderDemoQuestion();
@@ -531,16 +616,16 @@
 
         function showDemoFinished() {
             document.getElementById('demoContentBlock').classList.add('hidden');
+            document.getElementById('demoContentBlock').classList.remove('flex');
 
             const finalBlock = document.getElementById('demoFinishedBlock');
             finalBlock.classList.remove('hidden');
-            finalBlock.classList.add('flex'); // Add flex back if it was removed
+            finalBlock.classList.add('flex');
         }
 
         function abortDemo() {
             document.getElementById('demoOverlay').classList.add('hidden');
             document.getElementById('demoOverlay').classList.remove('flex');
-            // Reset state
             demoState.currentIndex = 0;
             demoState.questions = [];
             demoState.testId = null;
