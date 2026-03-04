@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración | Kokoro Empresas</title>
+    <title>ConfiguraciÃ³n | Kokoro Empresas</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../assets/css/style.css">
@@ -47,6 +47,10 @@
         <div class="p-4">
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
             <nav class="space-y-1 mb-8">
+                <a href="../evaluaciones/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-star text-lg"></i> Evaluaciones
+                </a>
                 <a href="../index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
                         class="ph ph-squares-four text-lg"></i> Dashboard</a>
@@ -71,11 +75,11 @@
                         class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba</a>
             </nav>
 
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">AdministraciÃ³n</div>
             <nav class="space-y-1">
                 <a href="index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md"><i
-                        class="ph ph-gear text-lg"></i> Configuración</a>
+                        class="ph ph-gear text-lg"></i> ConfiguraciÃ³n</a>
             </nav>
         </div>
     </aside>
@@ -92,10 +96,10 @@
         <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="mb-6 border-b border-gray-200 pb-5">
                 <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl tracking-tight">
-                    Configuración de Cuenta
+                    ConfiguraciÃ³n de Cuenta
                 </h2>
                 <p class="mt-2 text-sm text-gray-500">Ajusta tu perfil, controla a los miembros del equipo y edita
-                    plantillas de notificación.</p>
+                    plantillas de notificaciÃ³n.</p>
             </div>
 
             <!-- Tabs Navigation -->
@@ -106,7 +110,7 @@
                         id="btn-tab-micuenta">Mi Cuenta</button>
                     <button onclick="switchTab('tab-equipo')"
                         class="cfg-tab whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
-                        id="btn-tab-equipo">Gestión de Equipo</button>
+                        id="btn-tab-equipo">GestiÃ³n de Equipo</button>
                     <button onclick="switchTab('tab-notificaciones')"
                         class="cfg-tab whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
                         id="btn-tab-notificaciones">Notificaciones</button>
@@ -122,7 +126,7 @@
                     <!-- Info Personal -->
                     <div class="bg-white shadow sm:rounded-lg border border-gray-100 mb-6">
                         <div class="px-4 py-5 sm:p-6">
-                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Información personal</h3>
+                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">InformaciÃ³n personal</h3>
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Nombre</label>
@@ -144,19 +148,19 @@
                             <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Contacto</h3>
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">País</label>
+                                    <label class="block text-sm font-medium text-gray-700">PaÃ­s</label>
                                     <select id="u_country"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border bg-white">
-                                        <option value="México">México</option>
+                                        <option value="MÃ©xico">MÃ©xico</option>
                                         <option value="Colombia">Colombia</option>
-                                        <option value="Perú">Perú</option>
+                                        <option value="PerÃº">PerÃº</option>
                                         <option value="Ecuador">Ecuador</option>
                                         <option value="Chile">Chile</option>
                                         <option value="Argentina">Argentina</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+                                    <label class="block text-sm font-medium text-gray-700">TelÃ©fono</label>
                                     <input type="text" id="u_phone" placeholder="+52 123 456 7890"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
                                 </div>
@@ -184,7 +188,7 @@
                             <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Empresa</h3>
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Razón social</label>
+                                    <label class="block text-sm font-medium text-gray-700">RazÃ³n social</label>
                                     <input type="text" id="c_name"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
                                 </div>
@@ -215,16 +219,16 @@
                             class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">Guardar
                             Cambios</button>
                         <span id="saveMiCuentaStatus" class="text-sm font-medium text-green-600 hidden"><i
-                                class="ph ph-check-circle"></i> Todo está guardado.</span>
+                                class="ph ph-check-circle"></i> Todo estÃ¡ guardado.</span>
                     </div>
                 </form>
             </div>
 
-            <!-- SUBMENU 2: Gestión de Equipo -->
+            <!-- SUBMENU 2: GestiÃ³n de Equipo -->
             <div id="tab-equipo" class="cfg-tab-content space-y-6 pb-20">
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold leading-6 text-gray-900">Administra miembros, roles y acceso</h3>
-                    <p class="text-sm text-gray-500">Los usuarios invitados recibirán un correo para activar su cuenta
+                    <p class="text-sm text-gray-500">Los usuarios invitados recibirÃ¡n un correo para activar su cuenta
                         corporativa.</p>
                 </div>
 
@@ -257,13 +261,13 @@
                 <!-- Add Member Form -->
                 <div class="bg-white shadow sm:rounded-lg border border-gray-100 max-w-3xl">
                     <div class="px-4 py-5 sm:p-6">
-                        <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">Añade usuarios a tu equipo</h3>
+                        <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">AÃ±ade usuarios a tu equipo</h3>
                         <div class="rounded-md bg-yellow-50 p-4 mb-5 border border-yellow-200">
                             <div class="flex">
                                 <div class="flex-shrink-0"><i class="ph ph-info text-yellow-500 text-lg"></i></div>
                                 <div class="ml-3 flex-1 md:flex md:justify-between">
-                                    <p class="text-sm text-yellow-700">Al agregar un usuario, se le enviará un correo
-                                        para que establezca su contraseña. El estado será PENDIENTE hasta que active.
+                                    <p class="text-sm text-yellow-700">Al agregar un usuario, se le enviarÃ¡ un correo
+                                        para que establezca su contraseÃ±a. El estado serÃ¡ PENDIENTE hasta que active.
                                     </p>
                                 </div>
                             </div>
@@ -292,7 +296,7 @@
                                         required>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Teléfono (Opcional)</label>
+                                    <label class="block text-sm font-medium text-gray-700">TelÃ©fono (Opcional)</label>
                                     <input type="text" id="t_phone"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
                                 </div>
@@ -330,9 +334,9 @@
                             <li class="flex items-center justify-between py-4">
                                 <div class="flex flex-col">
                                     <p class="text-sm font-medium text-gray-900" id="privacy-option-1-label">Correo por
-                                        evaluación completada</p>
+                                        evaluaciÃ³n completada</p>
                                     <p class="text-sm text-gray-500" id="privacy-option-1-description">Recibir un correo
-                                        cada vez que tus postulantes completan una evaluación.</p>
+                                        cada vez que tus postulantes completan una evaluaciÃ³n.</p>
                                 </div>
                                 <button type="button" onclick="toggleSwitch(this, 'n_onComplete')"
                                     class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
@@ -374,7 +378,7 @@
                 <div class="mb-4">
                     <h3 class="text-lg font-semibold leading-6 text-gray-900">Plantillas de correo</h3>
                     <p class="text-sm text-gray-500">Edita visualmente el correo que reciben los candidatos. Los campos
-                        dinámicos se insertan con un clic.</p>
+                        dinÃ¡micos se insertan con un clic.</p>
                 </div>
 
                 <div class="flex flex-col lg:flex-row gap-6 items-start">
@@ -386,7 +390,7 @@
                             <select
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border bg-gray-50 cursor-not-allowed"
                                 disabled>
-                                <option>Nueva Evaluación: Invitación Postulante</option>
+                                <option>Nueva EvaluaciÃ³n: InvitaciÃ³n Postulante</option>
                             </select>
                         </div>
 
@@ -397,7 +401,7 @@
                             </label>
                             <input type="text" id="tpl_subject" onkeyup="updateCount(this, 'subjCount')"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border"
-                                value="Fuiste invitado a una evaluación en [{{NOMBRE_EMPRESA}}]">
+                                value="Fuiste invitado a una evaluaciÃ³n en [{{NOMBRE_EMPRESA}}]">
                         </div>
 
                         <div>
@@ -420,12 +424,12 @@
                             <!-- Editor ContentEditable -->
                             <div id="tpl_body" contenteditable="true"
                                 class="min-h-[250px] overflow-y-auto block w-full rounded-b-md border border-gray-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-black sm:text-sm p-4 prose prose-sm max-w-none">
-                                <p>Hola {{NOMBRE_POSTULANTE}}, has sido invitado a completar la evaluación:
+                                <p>Hola {{NOMBRE_POSTULANTE}}, has sido invitado a completar la evaluaciÃ³n:
                                     <strong>{{NOMBRE_EVALUACION}}</strong>.</p>
                                 <p><br></p>
                                 <p>Haz clic en el siguiente enlace para comenzar:</p>
                                 <p><br></p>
-                                <p><a href="{{LINK_EVALUACION}}" class="btn">Comenzar evaluación</a></p>
+                                <p><a href="{{LINK_EVALUACION}}" class="btn">Comenzar evaluaciÃ³n</a></p>
                             </div>
                         </div>
 
@@ -439,14 +443,14 @@
                                     class="rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Restablecer</button>
                             </div>
                             <span id="saveTplStatus" class="text-sm font-medium text-green-600 hidden"><i
-                                    class="ph ph-check-circle"></i> Todo está guardado.</span>
+                                    class="ph ph-check-circle"></i> Todo estÃ¡ guardado.</span>
                         </div>
                     </div>
 
                     <!-- Panel Derecho de Variables -->
                     <div class="w-full lg:w-72 flex-shrink-0 bg-gray-50 rounded-lg p-5 border border-gray-200">
                         <h4 class="text-sm font-semibold text-gray-900 mb-2">Campos personalizados</h4>
-                        <p class="text-xs text-gray-500 mb-4">Haz clic para insertar en la posición del cursor (Asunto o
+                        <p class="text-xs text-gray-500 mb-4">Haz clic para insertar en la posiciÃ³n del cursor (Asunto o
                             Mensaje).</p>
 
                         <div class="space-y-2" id="tokensList">
@@ -467,13 +471,13 @@
                         </div>
 
                         <div class="mt-6 border-t border-gray-200 pt-4">
-                            <h4 class="text-sm font-semibold text-gray-900 mb-2">Vista previa rápida</h4>
+                            <h4 class="text-sm font-semibold text-gray-900 mb-2">Vista previa rÃ¡pida</h4>
                             <div class="bg-white p-3 rounded border border-gray-200 text-xs text-gray-600">
                                 <strong>De:</strong> Kokoro Eval<br>
                                 <strong>Para:</strong> maria.perez@email.com<br>
                                 <strong>Asunto:</strong> Fuiste invi...<br>
                                 <div class="mt-2 text-[10px] bg-gray-50 p-2 rounded">
-                                    [El contenido enriquecido se enviará con los estilos del HTML cargado].
+                                    [El contenido enriquecido se enviarÃ¡ con los estilos del HTML cargado].
                                 </div>
                             </div>
                         </div>
@@ -540,7 +544,7 @@
                     const team = data.data.team || [];
                     const tbody = document.getElementById('teamTableBody');
                     if (team.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-sm text-gray-500">Solo tú estás en este equipo.</td></tr>';
+                        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-sm text-gray-500">Solo tÃº estÃ¡s en este equipo.</td></tr>';
                     } else {
                         tbody.innerHTML = '';
                         team.forEach((m, idx) => {
@@ -623,7 +627,7 @@
             };
 
             btn.disabled = true;
-            btn.innerHTML = 'Enviando invitación...';
+            btn.innerHTML = 'Enviando invitaciÃ³n...';
             try {
                 const res = await fetch('../../../api/client/config/save.php', {
                     method: 'POST',
@@ -634,7 +638,7 @@
                 if (data.status === 'success') {
                     f.reset();
                     loadConfig(); // Reload team table
-                    stat.innerHTML = '<i class="ph ph-check text-green-600 text-lg"></i> Invitación enviada.';
+                    stat.innerHTML = '<i class="ph ph-check text-green-600 text-lg"></i> InvitaciÃ³n enviada.';
                     stat.classList.replace('text-red-600', 'text-green-600');
                     stat.classList.remove('hidden');
                     setTimeout(() => stat.classList.add('hidden'), 3000);
@@ -712,7 +716,7 @@
             const subj = document.getElementById('tpl_subject');
             const body = document.getElementById('tpl_body');
 
-            // Si el focus más reciente estsaba en el ASUNTO
+            // Si el focus mÃ¡s reciente estsaba en el ASUNTO
             if (document.activeElement === subj) {
                 const start = subj.selectionStart;
                 const end = subj.selectionEnd;

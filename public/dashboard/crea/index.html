@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -23,6 +23,10 @@
         <div class="p-4 flex-1 overflow-y-auto">
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
             <nav class="space-y-1 mb-8">
+                <a href="../evaluaciones/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-star text-lg"></i> Evaluaciones
+                </a>
                 <a href="../index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
                     <i class="ph ph-squares-four text-lg"></i> Dashboard
@@ -53,11 +57,11 @@
                 </a>
             </nav>
 
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">AdministraciÃ³n</div>
             <nav class="space-y-1">
                 <a href="../configuracion/index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-gear text-lg"></i> Configuración
+                    <i class="ph ph-gear text-lg"></i> ConfiguraciÃ³n
                 </a>
             </nav>
         </div>
@@ -65,7 +69,7 @@
         <div class="border-t border-gray-200 p-4">
             <button onclick="logout()"
                 class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
-                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+                <i class="ph ph-sign-out text-lg"></i> Cerrar SesiÃ³n
             </button>
         </div>
     </aside>
@@ -88,8 +92,8 @@
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                         Crea Tu Prueba Ad-Hoc
                     </h2>
-                    <p class="mt-2 text-sm text-gray-500">Diseña una evaluación técnica o técnica con banco de preguntas
-                        único.</p>
+                    <p class="mt-2 text-sm text-gray-500">DiseÃ±a una evaluaciÃ³n tÃ©cnica o tÃ©cnica con banco de preguntas
+                        Ãºnico.</p>
                 </div>
             </div>
 
@@ -113,8 +117,8 @@
                                 <i class="ph ph-robot text-blue-600 text-xl"></i>
                             </div>
                             <div class="bg-gray-50 rounded-lg p-4 max-w-[85%] text-sm text-gray-700">
-                                <p>¡Hola! Soy tu asistente de reclutamiento. Dime, <strong>¿qué cargo deseas
-                                        evaluar?</strong> Puedes escribir el nombre del puesto o pegar la descripción
+                                <p>Â¡Hola! Soy tu asistente de reclutamiento. Dime, <strong>Â¿quÃ© cargo deseas
+                                        evaluar?</strong> Puedes escribir el nombre del puesto o pegar la descripciÃ³n
                                     completa de tu vacante para darte mejores recomendaciones.</p>
                             </div>
                         </div>
@@ -125,7 +129,7 @@
                         <form id="aiForm" class="flex gap-3">
                             <textarea id="aiInput" rows="2"
                                 class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                                placeholder="Escribe aquí (Ej. Desarrollador Frontend con react...)"></textarea>
+                                placeholder="Escribe aquÃ­ (Ej. Desarrollador Frontend con react...)"></textarea>
                             <button type="submit"
                                 class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 h-fit self-end transition-colors">
                                 <i class="ph ph-paper-plane-right mr-2"></i> Enviar
@@ -196,7 +200,7 @@
                     currentBundle = data.data.recommendation;
 
                     // Reply in chat
-                    let replyHTML = `<p class="mb-2">He analizado los requerimientos. Te sugiero un paquete compuesto por <strong>${currentBundle.tests.length} pruebas</strong> que tomarían alrededor de ${currentBundle.totalMins} minutos en total.</p>`;
+                    let replyHTML = `<p class="mb-2">He analizado los requerimientos. Te sugiero un paquete compuesto por <strong>${currentBundle.tests.length} pruebas</strong> que tomarÃ­an alrededor de ${currentBundle.totalMins} minutos en total.</p>`;
                     replyHTML += `<ul class="list-disc pl-4 space-y-1 mt-2">`;
                     currentBundle.tests.forEach(t => {
                         replyHTML += `<li><strong>${t.name}</strong>: <span class="text-gray-500">${t.reason}</span></li>`;
@@ -209,7 +213,7 @@
                     appendMessage('bot', `<span class="text-red-500">${data.message}</span>`);
                 }
             } catch (err) {
-                appendMessage('bot', `<span class="text-red-500">Ocurrió un error conectando con el motor IA.</span>`);
+                appendMessage('bot', `<span class="text-red-500">OcurriÃ³ un error conectando con el motor IA.</span>`);
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<i class="ph ph-paper-plane-right mr-2"></i> Enviar';
@@ -255,7 +259,7 @@
                     <p class="text-xs text-gray-500 mb-4">${currentBundle.description}</p>
                     
                     <div class="bg-blue-50 rounded p-3 flex items-center justify-between mb-4">
-                        <span class="text-xs font-semibold text-blue-800">Duración Aprox:</span>
+                        <span class="text-xs font-semibold text-blue-800">DuraciÃ³n Aprox:</span>
                         <span class="text-sm text-blue-900 font-bold">${currentBundle.totalMins} min</span>
                     </div>
 
@@ -307,7 +311,7 @@
 
                 if (data.status === 'success') {
                     // Success! Redirect to library Custom tab (simulated by going to standard lib for now until custom is added there)
-                    alert("¡Prueba creada con éxito! Redirigiendo a tu Biblioteca...");
+                    alert("Â¡Prueba creada con Ã©xito! Redirigiendo a tu Biblioteca...");
                     window.location.href = '../biblioteca/index.html';
                 } else {
                     alert("Error: " + data.message);
@@ -315,7 +319,7 @@
                     btn.innerHTML = originalText;
                 }
             } catch (err) {
-                alert("Ocurrió un error al guardar.");
+                alert("OcurriÃ³ un error al guardar.");
                 btn.disabled = false;
                 btn.innerHTML = originalText;
             }

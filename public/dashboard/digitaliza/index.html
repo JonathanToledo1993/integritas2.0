@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -23,6 +23,10 @@
         <div class="p-4 flex-1 overflow-y-auto">
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
             <nav class="space-y-1 mb-8">
+                <a href="../evaluaciones/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-star text-lg"></i> Evaluaciones
+                </a>
                 <a href="../index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
                     <i class="ph ph-squares-four text-lg"></i> Dashboard
@@ -53,11 +57,11 @@
                 </a>
             </nav>
 
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">AdministraciÃ³n</div>
             <nav class="space-y-1">
                 <a href="../configuracion/index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-gear text-lg"></i> Configuración
+                    <i class="ph ph-gear text-lg"></i> ConfiguraciÃ³n
                 </a>
             </nav>
         </div>
@@ -65,7 +69,7 @@
         <div class="border-t border-gray-200 p-4">
             <button onclick="logout()"
                 class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
-                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+                <i class="ph ph-sign-out text-lg"></i> Cerrar SesiÃ³n
             </button>
         </div>
     </aside>
@@ -88,7 +92,7 @@
                     <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
                         Transformar Documentos a Pruebas
                     </h2>
-                    <p class="mt-2 text-sm text-gray-500">Sube tus manuales en PDF y la IA de Kokoro creará un test
+                    <p class="mt-2 text-sm text-gray-500">Sube tus manuales en PDF y la IA de Kokoro crearÃ¡ un test
                         validado.</p>
                 </div>
             </div>
@@ -100,7 +104,7 @@
                 <div class="lg:col-span-1">
                     <div class="bg-white shadow sm:rounded-lg overflow-hidden border border-gray-100 sticky top-6">
                         <div class="px-4 py-5 sm:px-6 bg-gray-50 border-b border-gray-100">
-                            <h3 class="text-base font-semibold leading-6 text-gray-900">Configuración Base</h3>
+                            <h3 class="text-base font-semibold leading-6 text-gray-900">ConfiguraciÃ³n Base</h3>
                             <p class="mt-1 max-w-2xl text-sm text-gray-500">Ajustes principales de tu prueba.</p>
                         </div>
                         <div class="px-4 py-5 sm:p-6 space-y-4">
@@ -110,13 +114,13 @@
                                 <div class="mt-2">
                                     <input type="text" id="m_name"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-3"
-                                        placeholder="Ej. Prueba Técnica PHP" required>
+                                        placeholder="Ej. Prueba TÃ©cnica PHP" required>
                                 </div>
                             </div>
 
                             <div>
                                 <label for="m_desc"
-                                    class="block text-sm font-medium leading-6 text-gray-900">Descripción</label>
+                                    class="block text-sm font-medium leading-6 text-gray-900">DescripciÃ³n</label>
                                 <div class="mt-2">
                                     <textarea id="m_desc" rows="3"
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-3"></textarea>
@@ -126,7 +130,7 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="m_pass" class="block text-sm font-medium leading-6 text-gray-900">%
-                                        Aprobación</label>
+                                        AprobaciÃ³n</label>
                                     <div class="mt-2 relative rounded-md shadow-sm">
                                         <input type="number" id="m_pass"
                                             class="block w-full rounded-md border-0 py-1.5 pl-3 pr-7 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
@@ -186,25 +190,25 @@
                         <div class="bg-white shadow sm:rounded-lg border border-gray-200 p-12 text-center text-gray-500"
                             id="emptyQuestionsState">
                             <i class="ph ph-list-numbers text-4xl mb-3 text-gray-300"></i>
-                            <p>Tu prueba no tiene preguntas todavía.</p>
-                            <p class="text-xs mt-2">Añade tu primera pregunta usando los botones inferiores.</p>
+                            <p>Tu prueba no tiene preguntas todavÃ­a.</p>
+                            <p class="text-xs mt-2">AÃ±ade tu primera pregunta usando los botones inferiores.</p>
                         </div>
                     </div>
 
                     <!-- Add Question Buttons -->
                     <div class="bg-gray-50 border border-gray-200 border-dashed rounded-lg p-6">
-                        <h4 class="text-sm font-semibold text-gray-700 mb-4 text-center">Añadir Nueva Pregunta</h4>
+                        <h4 class="text-sm font-semibold text-gray-700 mb-4 text-center">AÃ±adir Nueva Pregunta</h4>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                             <button onclick="openQuestionModal('SINGLE_CHOICE')"
                                 class="flex flex-col items-center justify-center p-3 bg-white rounded shadow-sm border border-gray-100 hover:border-blue-500 hover:text-blue-600 transition-colors group">
                                 <i class="ph ph-radio-button text-2xl text-gray-400 group-hover:text-blue-500 mb-1"></i>
-                                <span class="text-xs font-medium text-center">Opción Única</span>
+                                <span class="text-xs font-medium text-center">OpciÃ³n Ãšnica</span>
                             </button>
                             <button onclick="openQuestionModal('MULTIPLE_CHOICE')"
                                 class="flex flex-col items-center justify-center p-3 bg-white rounded shadow-sm border border-gray-100 hover:border-blue-500 hover:text-blue-600 transition-colors group">
                                 <i
                                     class="ph ph-check-square-offset text-2xl text-gray-400 group-hover:text-blue-500 mb-1"></i>
-                                <span class="text-xs font-medium text-center">Opción Múltiple</span>
+                                <span class="text-xs font-medium text-center">OpciÃ³n MÃºltiple</span>
                             </button>
                             <button onclick="openQuestionModal('TRUE_FALSE')"
                                 class="flex flex-col items-center justify-center p-3 bg-white rounded shadow-sm border border-gray-100 hover:border-blue-500 hover:text-blue-600 transition-colors group">
@@ -226,7 +230,7 @@
                             <button onclick="openQuestionModal('TEXT_OR_CASE')"
                                 class="flex flex-col items-center justify-center p-3 bg-white rounded shadow-sm border border-gray-100 hover:border-blue-500 hover:text-blue-600 transition-colors group">
                                 <i class="ph ph-article text-2xl text-gray-400 group-hover:text-blue-500 mb-1"></i>
-                                <span class="text-xs font-medium text-center">Caso Práctico</span>
+                                <span class="text-xs font-medium text-center">Caso PrÃ¡ctico</span>
                             </button>
                             <button onclick="openQuestionModal('LIMITED_TIME')"
                                 class="flex flex-col items-center justify-center p-3 bg-white rounded shadow-sm border border-gray-100 hover:border-blue-500 hover:text-blue-600 transition-colors group col-span-2 sm:col-span-2">
@@ -280,7 +284,7 @@
                                         </div>
                                         <div id="qTimeLimitWrapper" class="hidden">
                                             <label class="block text-sm font-medium leading-6 text-gray-900">Segundos
-                                                Límite</label>
+                                                LÃ­mite</label>
                                             <input type="number" id="qTimeLimit" value="30" min="5"
                                                 class="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6 px-3">
                                         </div>
@@ -299,7 +303,7 @@
                                                 Respuesta</label>
                                             <button type="button" onclick="addOptionRow()" id="addOptBtn"
                                                 class="text-xs text-blue-600 hover:text-blue-800"><i
-                                                    class="ph ph-plus-circle"></i> Agregar Opción</button>
+                                                    class="ph ph-plus-circle"></i> Agregar OpciÃ³n</button>
                                         </div>
                                         <div id="qOptionsList" class="space-y-2">
                                             <!-- Rows injected here -->
@@ -309,8 +313,8 @@
                                     <!-- Open Ended Area -->
                                     <div id="qOpenArea" class="border-t border-gray-100 pt-4 hidden">
                                         <label class="block text-sm font-medium leading-6 text-gray-500 italic">El
-                                            candidato verá un campo de texto amplio para redactar su respuesta. La
-                                            validación se hará manualmente o por IA posterior.</label>
+                                            candidato verÃ¡ un campo de texto amplio para redactar su respuesta. La
+                                            validaciÃ³n se harÃ¡ manualmente o por IA posterior.</label>
                                     </div>
 
                                     <div id="qModalError" class="text-red-500 text-sm hidden"></div>
@@ -320,7 +324,7 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-gray-200">
                         <button type="button" onclick="addQuestionToState()"
-                            class="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 sm:ml-3 sm:w-auto">Añadir
+                            class="inline-flex w-full justify-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 sm:ml-3 sm:w-auto">AÃ±adir
                             Pregunta</button>
                         <button type="button" onclick="closeQuestionModal()"
                             class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancelar</button>
@@ -351,11 +355,11 @@
 
         /* --- Question Modal Logic --- */
         const typeLabels = {
-            'SINGLE_CHOICE': 'Selección Única',
-            'MULTIPLE_CHOICE': 'Opción Múltiple',
+            'SINGLE_CHOICE': 'SelecciÃ³n Ãšnica',
+            'MULTIPLE_CHOICE': 'OpciÃ³n MÃºltiple',
             'TRUE_FALSE': 'Verdadero o Falso',
             'OPEN_ENDED': 'Respuesta Abierta',
-            'FILE_OR_IMAGE': 'Análisis de Imagen',
+            'FILE_OR_IMAGE': 'AnÃ¡lisis de Imagen',
             'TEXT_OR_CASE': 'Caso de Estudio (Texto)',
             'LIMITED_TIME': 'Contrarreloj'
         };
@@ -420,7 +424,7 @@
             div.className = 'flex items-center gap-2 option-row';
             div.innerHTML = `
                 <input type="${inputType}" name="optCorrect" value="${uid}" class="${inputType === 'radio' ? 'rounded-full' : 'rounded'} h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600" ${isCorrect ? 'checked' : ''}>
-                <input type="text" class="opt-text flex-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 px-3" placeholder="Redactar opción..." value="${text}" required>
+                <input type="text" class="opt-text flex-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6 px-3" placeholder="Redactar opciÃ³n..." value="${text}" required>
                 <button type="button" onclick="this.parentElement.remove()" class="text-gray-400 hover:text-red-500"><i class="ph ph-trash"></i></button>
             `;
             list.appendChild(div);
@@ -472,7 +476,7 @@
                 });
 
                 if (!hasCorrect) {
-                    errorDiv.textContent = 'Debes marcar al menos una opción como correcta.';
+                    errorDiv.textContent = 'Debes marcar al menos una opciÃ³n como correcta.';
                     errorDiv.classList.remove('hidden');
                     return;
                 }
@@ -509,8 +513,8 @@
                 container.innerHTML = `
                     <div class="bg-white shadow sm:rounded-lg border border-gray-200 p-12 text-center text-gray-500" id="emptyQuestionsState">
                         <i class="ph ph-list-numbers text-4xl mb-3 text-gray-300"></i>
-                        <p>Tu prueba no tiene preguntas todavía.</p>
-                        <p class="text-xs mt-2">Añade tu primera pregunta usando los botones inferiores.</p>
+                        <p>Tu prueba no tiene preguntas todavÃ­a.</p>
+                        <p class="text-xs mt-2">AÃ±ade tu primera pregunta usando los botones inferiores.</p>
                     </div>`;
                 publishBtn.disabled = true;
                 publishBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -574,7 +578,7 @@
             const timeLimit = document.getElementById('m_is_unlimited').checked ? 0 : (parseInt(document.getElementById('m_time').value) || 0);
 
             if (!name) { alert("Obligatorio: Nombre de la prueba."); return; }
-            if (status === 'published' && questionsState.length === 0) { alert("No puedes publicar una prueba vacía."); return; }
+            if (status === 'published' && questionsState.length === 0) { alert("No puedes publicar una prueba vacÃ­a."); return; }
 
             const payload = {
                 name,

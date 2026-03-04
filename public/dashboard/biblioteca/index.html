@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -115,6 +115,10 @@
         <div class="p-4 flex-1 overflow-y-auto">
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
             <nav class="space-y-1 mb-8">
+                <a href="../evaluaciones/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-star text-lg"></i> Evaluaciones
+                </a>
                 <a href="../index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
                     <i class="ph ph-squares-four text-lg"></i> Dashboard
@@ -145,11 +149,11 @@
                 </a>
             </nav>
 
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">AdministraciÃ³n</div>
             <nav class="space-y-1">
                 <a href="../configuracion/index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-gear text-lg"></i> Configuración
+                    <i class="ph ph-gear text-lg"></i> ConfiguraciÃ³n
                 </a>
             </nav>
         </div>
@@ -157,7 +161,7 @@
         <div class="border-t border-gray-200 p-4">
             <button onclick="logout()"
                 class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
-                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+                <i class="ph ph-sign-out text-lg"></i> Cerrar SesiÃ³n
             </button>
         </div>
     </aside>
@@ -185,7 +189,7 @@
                             Mis pruebas
                         </h2>
                         <p class="mt-2 text-sm text-gray-500">
-                            Las pruebas Integritas son creadas por expertos en la materia y están científicamente
+                            Las pruebas Integritas son creadas por expertos en la materia y estÃ¡n cientÃ­ficamente
                             validadas.
                         </p>
                     </div>
@@ -214,7 +218,7 @@
                         onclick="setCategory('Habilidad', this, 'chip-habilidad')">Habilidad</button>
                     <button type="button"
                         class="chip-btn chip-tecnicas px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
-                        onclick="setCategory('Técnicas', this, 'chip-tecnicas')">Técnicas</button>
+                        onclick="setCategory('TÃ©cnicas', this, 'chip-tecnicas')">TÃ©cnicas</button>
                     <button type="button"
                         class="chip-btn chip-personalizadas px-5 py-2 rounded-full text-sm whitespace-nowrap transition-colors bg-white"
                         onclick="setCategory('Personalizadas', this, 'chip-personalizadas')">Personalizadas</button>
@@ -226,7 +230,7 @@
                 <button type="button"
                     class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800"
                     onclick="window.location.href='../create_candidate.html'">
-                    + Crear evaluación
+                    + Crear evaluaciÃ³n
                 </button>
             </div>
 
@@ -234,13 +238,13 @@
             <div id="catalogGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 max-w-5xl">
                 <div class="col-span-full py-12 text-center text-sm text-gray-500">
                     <i class="ph ph-spinner animate-spin text-2xl mb-2"></i><br>
-                    Cargando catálogo oficial...
+                    Cargando catÃ¡logo oficial...
                 </div>
             </div>
 
             <div id="noResultsMsg" class="hidden col-span-full py-12 text-center text-sm text-gray-500 max-w-5xl">
                 <i class="ph ph-magnifying-glass text-4xl mb-3 text-gray-300"></i>
-                <p>No se encontraron pruebas que coincidan con tu búsqueda.</p>
+                <p>No se encontraron pruebas que coincidan con tu bÃºsqueda.</p>
             </div>
 
         </main>
@@ -269,7 +273,7 @@
                         <p class="text-sm font-medium text-[#7a889b]" id="modalCategory">Personalidad</p>
 
                         <p class="mt-4 text-sm text-[#4d5b7c] font-medium" id="modalSummary">
-                            Mide tendencias de comportamiento ético y legal en el entorno laboral, incluyendo honestidad
+                            Mide tendencias de comportamiento Ã©tico y legal en el entorno laboral, incluyendo honestidad
                             y responsabilidad.
                         </p>
 
@@ -285,7 +289,7 @@
                         <div class="border border-gray-200 rounded-xl p-5">
                             <h4 class="text-sm font-bold text-gray-900 mb-2">Descripcion</h4>
                             <p class="text-sm text-gray-700" id="modalDescription">
-                                Mide tendencias de comportamiento ético y legal en el entorno laboral, incluyendo
+                                Mide tendencias de comportamiento Ã©tico y legal en el entorno laboral, incluyendo
                                 honestidad y responsabilidad.
                             </p>
 
@@ -328,8 +332,8 @@
                         <!-- Left Col: Question -->
                         <div class="md:col-span-5 fade-in" id="questionBox">
                             <h2 class="text-2xl font-semibold text-gray-900 leading-snug tracking-tight pr-4"
-                                id="demoQuestionText">¿Cuándo consideras apropiado informar a tu equipo de los errores o
-                                fallas críticas que encuentres?</h2>
+                                id="demoQuestionText">Â¿CuÃ¡ndo consideras apropiado informar a tu equipo de los errores o
+                                fallas crÃ­ticas que encuentres?</h2>
                         </div>
 
                         <!-- Right Col: Options -->
@@ -361,9 +365,9 @@
                     <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="ph ph-check-circle text-4xl text-green-600"></i>
                     </div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Fin de la demostración</h2>
-                    <p class="text-gray-600 mb-8 text-lg">Esta es una versión reducida de la prueba. La evaluación
-                        completa contiene más preguntas y análisis psicométrico.</p>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Fin de la demostraciÃ³n</h2>
+                    <p class="text-gray-600 mb-8 text-lg">Esta es una versiÃ³n reducida de la prueba. La evaluaciÃ³n
+                        completa contiene mÃ¡s preguntas y anÃ¡lisis psicomÃ©trico.</p>
                     <button type="button"
                         class="rounded-full bg-black px-8 py-3 text-sm font-semibold text-white hover:bg-gray-800"
                         onclick="abortDemo()">
@@ -415,7 +419,7 @@
                 }
             } catch (error) {
                 console.error('Error fetching catalog:', error);
-                document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error de conexión con el servidor.</div>`;
+                document.getElementById('catalogGrid').innerHTML = `<div class="col-span-full text-red-500 text-center py-8">Error de conexiÃ³n con el servidor.</div>`;
             }
         }
 
@@ -499,7 +503,7 @@
 
             document.getElementById('modalTitle').textContent = name;
             document.getElementById('modalCategory').textContent = cat;
-            document.getElementById('modalSummary').textContent = desc || 'Prueba técnica construida por reclutamiento.';
+            document.getElementById('modalSummary').textContent = desc || 'Prueba tÃ©cnica construida por reclutamiento.';
             document.getElementById('modalDescription').textContent = desc || '-';
             document.getElementById('modalAvgTime').textContent = `${avg} mins`;
             document.getElementById('modalMaxTime').textContent = `${max} mins`;
@@ -545,7 +549,7 @@
                 }
             } catch (err) {
                 console.error(err);
-                alert("Hubo un error de conexión con el servidor IA.");
+                alert("Hubo un error de conexiÃ³n con el servidor IA.");
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;

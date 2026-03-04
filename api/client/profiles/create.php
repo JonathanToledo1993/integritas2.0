@@ -34,8 +34,8 @@ try {
 
     // Insertar Perfil Maestro
     $sql = "
-        INSERT INTO profiles (id, companyId, name, hierarchy, area, totalDurationMins, creatorId, createdAt, updatedAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+        INSERT INTO profiles (id, companyId, name, hierarchy, area, testKeys, totalDurationMins, creatorId, createdAt, updatedAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     ";
 
     $stmt = $pdo->prepare($sql);
@@ -45,6 +45,7 @@ try {
         $name,
         $hierarchy,
         $area,
+        json_encode([]), // Default empty json array to avoid 1364 Error
         $totalMinutes,
         $clientData['id'] // creatorId
     ]);

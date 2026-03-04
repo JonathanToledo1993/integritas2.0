@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -37,6 +37,10 @@
         <div class="p-4 flex-1 overflow-y-auto">
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
             <nav class="space-y-1 mb-8">
+                <a href="evaluaciones/index.html"
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
+                    <i class="ph ph-star text-lg"></i> Evaluaciones
+                </a>
                 <a href="index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
                     <i class="ph ph-squares-four text-lg"></i> Dashboard
@@ -67,11 +71,11 @@
                 </a>
             </nav>
 
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">AdministraciÃ³n</div>
             <nav class="space-y-1">
                 <a href="configuracion/index.html"
                     class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-gear text-lg"></i> Configuración
+                    <i class="ph ph-gear text-lg"></i> ConfiguraciÃ³n
                 </a>
             </nav>
         </div>
@@ -79,7 +83,7 @@
         <div class="border-t border-gray-200 p-4">
             <button onclick="logout()"
                 class="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 rounded-md hover:bg-red-50 transition-colors">
-                <i class="ph ph-sign-out text-lg"></i> Cerrar Sesión
+                <i class="ph ph-sign-out text-lg"></i> Cerrar SesiÃ³n
             </button>
         </div>
     </aside>
@@ -112,7 +116,7 @@
                 <div class="mt-4 flex md:ml-4 md:mt-0 gap-3">
                     <button type="button"
                         class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                        <i class="ph ph-shopping-cart mr-2 text-lg"></i> Comprar Créditos
+                        <i class="ph ph-shopping-cart mr-2 text-lg"></i> Comprar CrÃ©ditos
                     </button>
                     <button type="button" onclick="window.location.href='create_candidate.html'"
                         class="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
@@ -120,7 +124,7 @@
                     </button>
                     <button type="button" onclick="openCreateEvaluationModal()"
                         class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-                        <i class="ph ph-folder-plus mr-2 text-lg"></i> Crear Evaluación
+                        <i class="ph ph-folder-plus mr-2 text-lg"></i> Crear EvaluaciÃ³n
                     </button>
                 </div>
             </div>
@@ -134,7 +138,7 @@
                 </div>
                 <div
                     class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 border border-gray-100 border-t-4 border-t-blue-500">
-                    <dt class="truncate text-sm font-medium text-gray-500">Créditos Disponibles</dt>
+                    <dt class="truncate text-sm font-medium text-gray-500">CrÃ©ditos Disponibles</dt>
                     <dd class="mt-1 flex items-baseline gap-2">
                         <span class="text-3xl font-semibold tracking-tight text-gray-900" id="metricCredits">-</span>
                         <span class="text-sm font-medium text-gray-500">reportes a descargar</span>
@@ -201,21 +205,21 @@
                     document.getElementById('companyNameDisplay').textContent = company.name;
 
                     document.getElementById('metricPlan').textContent = company.plan === 'UNLIMITED' ? 'Ilimitado' : 'Pago por Uso';
-                    document.getElementById('metricCredits').textContent = company.plan === 'UNLIMITED' ? '∞' : company.actualCredits;
+                    document.getElementById('metricCredits').textContent = company.plan === 'UNLIMITED' ? 'âˆž' : company.actualCredits;
                     document.getElementById('metricEvals').textContent = evaluations.length;
 
                     const tbody = document.getElementById('evaluationsBody');
                     tbody.innerHTML = '';
 
                     if (evaluations.length === 0) {
-                        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-gray-500">Aún no has invitado candidatos.</td></tr>`;
+                        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-gray-500">AÃºn no has invitado candidatos.</td></tr>`;
                         return;
                     }
 
                     evaluations.forEach(ev => {
                         const row = document.createElement('tr');
 
-                        // Lógica para vencido o activo
+                        // LÃ³gica para vencido o activo
                         const fExp = new Date(ev.expiresAt);
                         const isExpired = fExp < new Date();
                         const statusClass = isExpired ? 'text-red-600' : 'text-green-600';
@@ -239,8 +243,8 @@
             }
 
             async function downloadReport(inviteId) {
-                // Emula el End-point de descuento de créditos
-                if (!confirm("¿Está seguro? Esto descontará 1 Crédito de su plan por la descarga del reporte completo del candidato.")) return;
+                // Emula el End-point de descuento de crÃ©ditos
+                if (!confirm("Â¿EstÃ¡ seguro? Esto descontarÃ¡ 1 CrÃ©dito de su plan por la descarga del reporte completo del candidato.")) return;
 
                 try {
                     const res = await fetch('../../api/client/report_download.php', {
@@ -256,7 +260,7 @@
                     if (!res.ok) throw new Error(data.error);
 
                     alert(data.message);
-                    loadDashboard(); // Recargar créditos
+                    loadDashboard(); // Recargar crÃ©ditos
                 } catch (e) {
                     alert(e.message);
                 }
