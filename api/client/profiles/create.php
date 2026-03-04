@@ -24,16 +24,18 @@ $name = trim($data['name']);
 $hierarchy = trim($data['hierarchy'] ?? '');
 $area = trim($data['area'] ?? '');
 
-// Asumiremos testKeys vacías por ahora si no envía el frontend
-$testKeys = json_encode($data['testKeys'] ?? []);
-$totalMinutes = (int)($data['totalMinutes'] ?? 0);
+$testsArray = $data['tests'] ?? [];
+$totalMinutes = (int)($data['totalDurationMins'] ?? 0);
 
 try {
+    $pdo->beginTransaction();
+
     $profileId = 'prof_' . uniqid();
 
+    // Insertar Perfil Maestro
     $sql = "
-        INSERT INTO profiles (id, companyId, name, testKeys, totalMinutes, hierarchy, area, creatorId, createdAt, updatedAt)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+        INSERT INTO profiles (id, companyId, name, hierarchy, area, totalDurationMins, creatorId, createdAt, updatedAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     ";
 
     $stmt = $pdo->prepare($sql);
@@ -41,24 +43,40 @@ try {
         $profileId,
         $companyId,
         $name,
-        $testKeys,
-        $totalMinutes,
         $hierarchy,
         $area,
+        $totalMinutes,
         $clientData['id'] // creatorId
     ]);
+
+    // Insertar relación Pivot
+    if (!empty($testsArray)) {
+        $stmtPivot = $pdo->prepare("INSERT INTO profile_tests (profileId, testId, isCustom) VALUES (?, ?, ?)");
+        foreach ($testsArray as $t) {
+            $testId = $t['id'];
+            $isCustom = (int)$t['isCustom'];
+            $stmtPivot->execute([$profileId, $testId, $isCustom]);
+        }
+    }
+
+    $pdo->commit();
 
     Responder::success([
         "profile" => [
             "id" => $profileId,
             "name" => $name,
             "hierarchy" => $hierarchy,
-            "area" => $area
+            "area" => $area,
+            "totalDurationMins" => $totalMinutes,
+            "assignedTests" => count($testsArray)
         ]
     ], "Perfil Creado Exitosamente.");
 
 }
 catch (Exception $e) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
     Responder::error("Error guardando el perfil: " . $e->getMessage(), 500);
 }
 ?>
