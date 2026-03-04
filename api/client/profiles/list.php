@@ -38,6 +38,6 @@ try {
 
 }
 catch (Exception $e) {
-    Responder::error("Error del servidor obteniendo perfiles.", 500);
+    Responder::error("Error obteniendo perfiles: " . $e->getMessage(), 500);
 }
 ?>

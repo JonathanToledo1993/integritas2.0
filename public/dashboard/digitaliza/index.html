@@ -582,14 +582,14 @@
                 passingScore: passScore,
                 totalDuration: timeLimit,
                 isAiGenerated: 0,
-                // THE CORE LOGIC CHANGE: Persisting all manually built questions as a JSON string inside testKeys
-                testKeys: {
+                // THE CORE LOGIC CHANGE: Persisting all manually built questions as a JSON string
+                testKeys: JSON.stringify({
                     status: status,
                     questions: questionsState
-                }
+                })
             };
 
-            const btn = document.getElementById('btnPublish');
+            const btn = document.getElementById('btnPublish'); // Simplified, both disable
             const orig = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = 'Guardando...';
@@ -608,7 +608,8 @@
                     alert("Error: " + data.message);
                 }
             } catch (r) {
-                alert("Error de red guardando la prueba.");
+                alert("Error de red guardando la prueba. Verifica la consola.");
+                console.error(r);
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = orig;

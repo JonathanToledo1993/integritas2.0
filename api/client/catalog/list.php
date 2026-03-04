@@ -30,6 +30,6 @@ try {
 
 }
 catch (Exception $e) {
-    Responder::error("Error del servidor obteniendo el catálogo.", 500);
+    Responder::error("Error obteniendo catálogo: " . $e->getMessage(), 500);
 }
 ?>

@@ -9,6 +9,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .cfg-tab-content {
+            display: none;
+        }
+
+        .cfg-tab-content.active {
+            display: block;
+        }
+
+        .cfg-tab.active {
+            border-color: black;
+            color: black;
+        }
+
+        .cfg-tab {
+            border-color: transparent;
+            color: #6b7280;
+        }
+
+        .cfg-tab:hover {
+            border-color: #d1d5db;
+            color: #374151;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 min-h-screen flex">
@@ -24,41 +48,34 @@
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Principal</div>
             <nav class="space-y-1 mb-8">
                 <a href="../index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-squares-four text-lg"></i> Dashboard
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
+                        class="ph ph-squares-four text-lg"></i> Dashboard</a>
                 <a href="../postulantes/index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-users text-lg"></i> Postulantes
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
+                        class="ph ph-users text-lg"></i> Postulantes</a>
                 <a href="../perfiles/index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
+                        class="ph ph-briefcase text-lg"></i> Perfiles (Carpeta)</a>
             </nav>
 
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Pruebas</div>
             <nav class="space-y-1 mb-8">
                 <a href="../biblioteca/index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-books text-lg"></i> Biblioteca Kokoro
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
+                        class="ph ph-books text-lg"></i> Biblioteca Kokoro</a>
                 <a href="../crea/index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
+                        class="ph ph-plus-circle text-lg"></i> Crea Tu Prueba</a>
                 <a href="../digitaliza/index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black">
-                    <i class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-black"><i
+                        class="ph ph-file-pdf text-lg"></i> Digitaliza Tu Prueba</a>
             </nav>
 
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-3">Administración</div>
             <nav class="space-y-1">
                 <a href="index.html"
-                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md">
-                    <i class="ph ph-gear text-lg"></i> Configuración
-                </a>
+                    class="flex items-center gap-3 px-3 py-2 text-sm font-medium bg-gray-100 text-black rounded-md"><i
+                        class="ph ph-gear text-lg"></i> Configuración</a>
             </nav>
         </div>
     </aside>
@@ -73,7 +90,7 @@
         </header>
 
         <main class="flex-1 overflow-y-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="mb-8 border-b border-gray-200 pb-5">
+            <div class="mb-6 border-b border-gray-200 pb-5">
                 <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl tracking-tight">
                     Configuración de Cuenta
                 </h2>
@@ -81,46 +98,386 @@
                     plantillas de notificación.</p>
             </div>
 
-            <!-- Fake Tabs Navigation -->
-            <div class="mb-8">
-                <nav class="flex space-x-8 border-b border-gray-200" aria-label="Tabs">
-                    <a href="#"
-                        class="border-black text-black whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
-                        aria-current="page">General</a>
-                    <a href="#"
-                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">Gestión
-                        de Equipo</a>
-                    <a href="#"
-                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">Plantillas
-                        de Correo</a>
-                    <a href="#"
-                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium">Suscripción</a>
+            <!-- Tabs Navigation -->
+            <div class="mb-8 overflow-x-auto">
+                <nav class="flex space-x-8 border-b border-gray-200 min-w-max" aria-label="Tabs">
+                    <button onclick="switchTab('tab-micuenta')"
+                        class="cfg-tab active whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                        id="btn-tab-micuenta">Mi Cuenta</button>
+                    <button onclick="switchTab('tab-equipo')"
+                        class="cfg-tab whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                        id="btn-tab-equipo">Gestión de Equipo</button>
+                    <button onclick="switchTab('tab-notificaciones')"
+                        class="cfg-tab whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                        id="btn-tab-notificaciones">Notificaciones</button>
+                    <button onclick="switchTab('tab-plantillas')"
+                        class="cfg-tab whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium"
+                        id="btn-tab-plantillas">Plantillas de Correo</button>
                 </nav>
             </div>
 
-            <div class="bg-white shadow sm:rounded-lg border border-gray-100 max-w-3xl">
-                <div class="px-4 py-5 sm:p-6">
-                    <h3 class="text-base font-semibold leading-6 text-gray-900">Perfil de la Empresa</h3>
-                    <div class="mt-2 text-sm text-gray-500">
-                        <p>Actualice el nombre comercial y el RFC.</p>
+            <!-- SUBMENU 1: Mi Cuenta -->
+            <div id="tab-micuenta" class="cfg-tab-content active space-y-6 max-w-3xl pb-20">
+                <form id="formMiCuenta">
+                    <!-- Info Personal -->
+                    <div class="bg-white shadow sm:rounded-lg border border-gray-100 mb-6">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Información personal</h3>
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                                    <input type="text" id="u_name"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Apellido</label>
+                                    <input type="text" id="u_lastName"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <form id="configForm" class="mt-5 space-y-4">
-                        <div id="cfgMessage" class="hidden text-sm bg-green-50 text-green-700 p-2 rounded"></div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Nombre de Compañía</label>
-                            <input type="text" class="mt-1 form-input w-full bg-gray-50" value="Cargando..." readonly
-                                id="cfgName">
+
+                    <!-- Contacto -->
+                    <div class="bg-white shadow sm:rounded-lg border border-gray-100 mb-6">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Contacto</h3>
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">País</label>
+                                    <select id="u_country"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border bg-white">
+                                        <option value="México">México</option>
+                                        <option value="Colombia">Colombia</option>
+                                        <option value="Perú">Perú</option>
+                                        <option value="Ecuador">Ecuador</option>
+                                        <option value="Chile">Chile</option>
+                                        <option value="Argentina">Argentina</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+                                    <input type="text" id="u_phone" placeholder="+52 123 456 7890"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Correo corporativo
+                                        (Login)</label>
+                                    <input type="email" id="u_emailWork" readonly
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-50 text-gray-500 sm:text-sm py-2 px-3 border cursor-not-allowed">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Correo personal
+                                        (Opcional)</label>
+                                    <input type="email" id="u_emailPersonal"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">RFC / Identificación Fiscal</label>
-                            <input type="text" id="cfgRfc" class="mt-1 form-input w-full"
-                                placeholder="Razón social interna">
+                    </div>
+
+                    <!-- Empresa -->
+                    <div class="bg-white shadow sm:rounded-lg border border-gray-100 mb-6">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Empresa</h3>
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Razón social</label>
+                                    <input type="text" id="c_name"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">RUC / NIT empresa</label>
+                                    <input type="text" id="c_rfc"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700">Logo de la empresa</label>
+                                <div class="mt-2 flex items-center gap-x-3">
+                                    <div class="h-12 w-12 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden"
+                                        id="logoPreview">
+                                        <i class="ph ph-buildings text-gray-400 text-xl"></i>
+                                    </div>
+                                    <button type="button"
+                                        class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Seleccionar
+                                        archivo</button>
+                                    <span class="text-xs text-gray-500">PNG/JPG (Opcional)</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="pt-4 flex justify-end">
-                            <button type="button" onclick="saveConfig()" class="btn-primary w-auto">Guardar
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button type="button" onclick="saveMiCuenta()" id="btnSaveMiCuenta"
+                            class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">Guardar
+                            Cambios</button>
+                        <span id="saveMiCuentaStatus" class="text-sm font-medium text-green-600 hidden"><i
+                                class="ph ph-check-circle"></i> Todo está guardado.</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- SUBMENU 2: Gestión de Equipo -->
+            <div id="tab-equipo" class="cfg-tab-content space-y-6 pb-20">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold leading-6 text-gray-900">Administra miembros, roles y acceso</h3>
+                    <p class="text-sm text-gray-500">Los usuarios invitados recibirán un correo para activar su cuenta
+                        corporativa.</p>
+                </div>
+
+                <!-- Team Table -->
+                <div class="bg-white shadow sm:rounded-lg overflow-hidden border border-gray-200 mb-8 max-w-5xl">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">#
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Nombre
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rol
+                                </th>
+                                <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6"><span
+                                        class="sr-only">Acciones</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white" id="teamTableBody">
+                            <tr>
+                                <td colspan="5" class="p-4 text-center text-sm text-gray-500">Cargando equipo...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Add Member Form -->
+                <div class="bg-white shadow sm:rounded-lg border border-gray-100 max-w-3xl">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900 mb-2">Añade usuarios a tu equipo</h3>
+                        <div class="rounded-md bg-yellow-50 p-4 mb-5 border border-yellow-200">
+                            <div class="flex">
+                                <div class="flex-shrink-0"><i class="ph ph-info text-yellow-500 text-lg"></i></div>
+                                <div class="ml-3 flex-1 md:flex md:justify-between">
+                                    <p class="text-sm text-yellow-700">Al agregar un usuario, se le enviará un correo
+                                        para que establezca su contraseña. El estado será PENDIENTE hasta que active.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="formAddMember">
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Nombre</label>
+                                    <input type="text" id="t_name"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border"
+                                        required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Apellido</label>
+                                    <input type="text" id="t_lastName"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Email (Corporativo)</label>
+                                    <input type="email" id="t_email"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border"
+                                        required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Teléfono (Opcional)</label>
+                                    <input type="text" id="t_phone"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border">
+                                </div>
+                            </div>
+                            <div class="mb-4 w-1/2">
+                                <label class="block text-sm font-medium text-gray-700">Rol</label>
+                                <div class="mt-1 flex items-center gap-3">
+                                    <select id="t_role"
+                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border bg-white">
+                                        <option value="recruiter">Reclutador</option>
+                                        <option value="admin">Administrador</option>
+                                    </select>
+                                    <a href="#"
+                                        class="text-xs text-blue-600 hover:underline whitespace-nowrap hidden">Define
+                                        permisos</a>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <button type="button" onclick="addTeamMember()" id="btnSaveTeam"
+                                    class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">Agregar
+                                    usuario</button>
+                                <span id="saveTeamStatus" class="ml-3 text-sm font-medium text-red-600 hidden"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBMENU 3: Notificaciones -->
+            <div id="tab-notificaciones" class="cfg-tab-content space-y-6 max-w-3xl pb-20">
+                <div class="bg-white shadow sm:rounded-lg border border-gray-100">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h3 class="text-base font-semibold leading-6 text-gray-900 mb-4">Ajustes de Notificaciones</h3>
+                        <ul role="list" class="divide-y divide-gray-200">
+                            <li class="flex items-center justify-between py-4">
+                                <div class="flex flex-col">
+                                    <p class="text-sm font-medium text-gray-900" id="privacy-option-1-label">Correo por
+                                        evaluación completada</p>
+                                    <p class="text-sm text-gray-500" id="privacy-option-1-description">Recibir un correo
+                                        cada vez que tus postulantes completan una evaluación.</p>
+                                </div>
+                                <button type="button" onclick="toggleSwitch(this, 'n_onComplete')"
+                                    class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+                                    role="switch" aria-checked="true">
+                                    <span
+                                        class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                                </button>
+                                <input type="hidden" id="n_onComplete" value="true">
+                            </li>
+                            <li class="flex items-center justify-between py-4">
+                                <div class="flex flex-col">
+                                    <p class="text-sm font-medium text-gray-900" id="privacy-option-2-label">Resumen
+                                        diario</p>
+                                    <p class="text-sm text-gray-500" id="privacy-option-2-description">Recibir un correo
+                                        diario con un resumen de las evaluaciones finalizadas.</p>
+                                </div>
+                                <button type="button" onclick="toggleSwitch(this, 'n_daily')"
+                                    class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+                                    role="switch" aria-checked="false">
+                                    <span
+                                        class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                                </button>
+                                <input type="hidden" id="n_daily" value="false">
+                            </li>
+                        </ul>
+                        <div class="mt-6 flex items-center gap-4">
+                            <button type="button" onclick="saveNotifications()" id="btnSaveNotif"
+                                class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">Guardar
                                 Cambios</button>
+                            <span id="saveNotifStatus" class="text-sm font-medium text-green-600 hidden"><i
+                                    class="ph ph-check-circle"></i> Preferencias actualizadas.</span>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBMENU 4: Plantillas de Correo -->
+            <div id="tab-plantillas" class="cfg-tab-content pb-20 max-w-5xl">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold leading-6 text-gray-900">Plantillas de correo</h3>
+                    <p class="text-sm text-gray-500">Edita visualmente el correo que reciben los candidatos. Los campos
+                        dinámicos se insertan con un clic.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-6 items-start">
+                    <!-- Editor Izquierdo -->
+                    <div class="flex-1 w-full bg-white shadow sm:rounded-lg border border-gray-100 p-6">
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Plantilla (1 disponible)</label>
+                            <select
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border bg-gray-50 cursor-not-allowed"
+                                disabled>
+                                <option>Nueva Evaluación: Invitación Postulante</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="flex justify-between text-sm font-medium text-gray-700">
+                                Asunto
+                                <span class="font-normal text-gray-400" id="subjCount">36 caracteres</span>
+                            </label>
+                            <input type="text" id="tpl_subject" onkeyup="updateCount(this, 'subjCount')"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black sm:text-sm py-2 px-3 border"
+                                value="Fuiste invitado a una evaluación en [{{NOMBRE_EMPRESA}}]">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Cuerpo del Mensaje</label>
+
+                            <!-- Editor Toolbar -->
+                            <div class="border border-gray-300 border-b-0 rounded-t-md bg-gray-50 p-2 flex gap-2">
+                                <button type="button" class="p-1 text-gray-600 hover:bg-gray-200 rounded"
+                                    onclick="document.execCommand('bold')"><i class="ph ph-text-b"></i></button>
+                                <button type="button" class="p-1 text-gray-600 hover:bg-gray-200 rounded"
+                                    onclick="document.execCommand('italic')"><i class="ph ph-text-italic"></i></button>
+                                <button type="button" class="p-1 text-gray-600 hover:bg-gray-200 rounded"
+                                    onclick="document.execCommand('underline')"><i
+                                        class="ph ph-text-underline"></i></button>
+                                <button type="button" class="p-1 text-gray-600 hover:bg-gray-200 rounded ml-2"
+                                    onclick="document.execCommand('insertUnorderedList')"><i
+                                        class="ph ph-list-bullets"></i></button>
+                            </div>
+
+                            <!-- Editor ContentEditable -->
+                            <div id="tpl_body" contenteditable="true"
+                                class="min-h-[250px] overflow-y-auto block w-full rounded-b-md border border-gray-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-black sm:text-sm p-4 prose prose-sm max-w-none">
+                                <p>Hola {{NOMBRE_POSTULANTE}}, has sido invitado a completar la evaluación:
+                                    <strong>{{NOMBRE_EVALUACION}}</strong>.</p>
+                                <p><br></p>
+                                <p>Haz clic en el siguiente enlace para comenzar:</p>
+                                <p><br></p>
+                                <p><a href="{{LINK_EVALUACION}}" class="btn">Comenzar evaluación</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Footer actions -->
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                            <div class="flex gap-3">
+                                <button type="button" onclick="saveTemplate()" id="btnSaveTpl"
+                                    class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800">Guardar
+                                    plantilla</button>
+                                <button type="button" onclick="loadConfig()"
+                                    class="rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Restablecer</button>
+                            </div>
+                            <span id="saveTplStatus" class="text-sm font-medium text-green-600 hidden"><i
+                                    class="ph ph-check-circle"></i> Todo está guardado.</span>
+                        </div>
+                    </div>
+
+                    <!-- Panel Derecho de Variables -->
+                    <div class="w-full lg:w-72 flex-shrink-0 bg-gray-50 rounded-lg p-5 border border-gray-200">
+                        <h4 class="text-sm font-semibold text-gray-900 mb-2">Campos personalizados</h4>
+                        <p class="text-xs text-gray-500 mb-4">Haz clic para insertar en la posición del cursor (Asunto o
+                            Mensaje).</p>
+
+                        <div class="space-y-2" id="tokensList">
+                            <button type="button" onclick="insertToken('{{NOMBRE_POSTULANTE}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{NOMBRE_POSTULANTE}}</button>
+                            <button type="button" onclick="insertToken('{{APELLIDO_POSTULANTE}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{APELLIDO_POSTULANTE}}</button>
+                            <button type="button" onclick="insertToken('{{NOMBRE_EMPRESA}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{NOMBRE_EMPRESA}}</button>
+                            <button type="button" onclick="insertToken('{{NOMBRE_EVALUACION}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{NOMBRE_EVALUACION}}</button>
+                            <button type="button" onclick="insertToken('{{LINK_EVALUACION}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{LINK_EVALUACION}}</button>
+                            <button type="button" onclick="insertToken('{{FECHA_EXPIRACION}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{FECHA_EXPIRACION}}</button>
+                            <button type="button" onclick="insertToken('{{USUARIO_CREADOR}}')"
+                                class="w-full text-left px-3 py-2 text-xs font-mono bg-white border border-gray-300 rounded hover:border-blue-500 hover:text-blue-600 transition-colors">{{USUARIO_CREADOR}}</button>
+                        </div>
+
+                        <div class="mt-6 border-t border-gray-200 pt-4">
+                            <h4 class="text-sm font-semibold text-gray-900 mb-2">Vista previa rápida</h4>
+                            <div class="bg-white p-3 rounded border border-gray-200 text-xs text-gray-600">
+                                <strong>De:</strong> Kokoro Eval<br>
+                                <strong>Para:</strong> maria.perez@email.com<br>
+                                <strong>Asunto:</strong> Fuiste invi...<br>
+                                <div class="mt-2 text-[10px] bg-gray-50 p-2 rounded">
+                                    [El contenido enriquecido se enviará con los estilos del HTML cargado].
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -132,6 +489,30 @@
         const token = localStorage.getItem('kokoro_client_token');
         if (!token) window.location.href = '../../index.html';
 
+        // TABS LOGIC
+        function switchTab(tabId) {
+            document.querySelectorAll('.cfg-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.cfg-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // TOGGLE SWITCH LOGIC (Notificaciones)
+        function toggleSwitch(btn, inputId) {
+            const isChecked = btn.getAttribute('aria-checked') === 'true';
+            btn.setAttribute('aria-checked', !isChecked);
+            if (!isChecked) {
+                btn.classList.replace('bg-gray-200', 'bg-blue-600');
+                btn.querySelector('span').classList.replace('translate-x-0', 'translate-x-5');
+                document.getElementById(inputId).value = 'true';
+            } else {
+                btn.classList.replace('bg-blue-600', 'bg-gray-200');
+                btn.querySelector('span').classList.replace('translate-x-5', 'translate-x-0');
+                document.getElementById(inputId).value = 'false';
+            }
+        }
+
+        // INIT LOAD
         document.addEventListener('DOMContentLoaded', loadConfig);
 
         async function loadConfig() {
@@ -142,50 +523,206 @@
                 const data = await res.json();
 
                 if (data.status === 'success') {
-                    const c = data.data.company;
-                    document.getElementById('cfgName').value = c.name;
-                    document.getElementById('cfgRfc').value = c.rfc || '';
+                    // 1. Mi Cuenta
+                    const user = data.data.user || {};
+                    const co = data.data.company || {};
+                    document.getElementById('u_name').value = user.firstName || '';
+                    document.getElementById('u_lastName').value = user.lastName || '';
+                    document.getElementById('u_emailWork').value = user.emailWork || '';
+                    document.getElementById('u_emailPersonal').value = user.emailPersonal || '';
+                    document.getElementById('u_phone').value = user.phone || '';
+                    if (co.country) document.getElementById('u_country').value = co.country;
+
+                    document.getElementById('c_name').value = co.name || '';
+                    document.getElementById('c_rfc').value = co.rfc || '';
+
+                    // 2. Gestion Equipo
+                    const team = data.data.team || [];
+                    const tbody = document.getElementById('teamTableBody');
+                    if (team.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-sm text-gray-500">Solo tú estás en este equipo.</td></tr>';
+                    } else {
+                        tbody.innerHTML = '';
+                        team.forEach((m, idx) => {
+                            let badge = m.status === 'ACTIVE' ? '<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">ACTIVO</span>' : '<span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">PENDIENTE</span>';
+                            tbody.innerHTML += `
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">${idx + 1}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${m.firstName} ${m.lastName || ''} ${badge}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${m.emailWork}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 capitalize">${m.role}</td>
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                    <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Editar</a>
+                                    <a href="#" class="text-red-600 hover:text-red-900">Eliminar</a>
+                                </td>
+                            </tr>`;
+                        });
+                    }
+
+                    // 3. Notificaciones
+                    const n = data.data.notifications || {};
+                    const btnComplete = document.getElementById('n_onComplete').previousElementSibling;
+                    const btnDaily = document.getElementById('n_daily').previousElementSibling;
+
+                    if (n.emailOnEvalCompleted !== (document.getElementById('n_onComplete').value === 'true')) toggleSwitch(btnComplete, 'n_onComplete');
+                    if (n.dailySummary !== (document.getElementById('n_daily').value === 'true')) toggleSwitch(btnDaily, 'n_daily');
+
+                    // 4. Plantillas
+                    const t = data.data.templates || [];
+                    if (t.length > 0) {
+                        document.getElementById('tpl_subject').value = t[0].subject;
+                        document.getElementById('tpl_body').innerHTML = t[0].bodyHtml;
+                    }
+                    updateCount(document.getElementById('tpl_subject'), 'subjCount');
+
                 } else if (res.status === 401) {
-                    logout();
+                    window.location.href = '../../index.html';
                 }
             } catch (error) {
                 console.error("Error cargando config", error);
             }
         }
 
-        async function saveConfig() {
-            const rfc = document.getElementById('cfgRfc').value;
-            const msgBox = document.getElementById('cfgMessage');
+        // SAVE LOGIC: 1. Mi Cuenta
+        async function saveMiCuenta() {
+            const payload = {
+                action: 'mi_cuenta',
+                user: {
+                    firstName: document.getElementById('u_name').value,
+                    lastName: document.getElementById('u_lastName').value,
+                    phone: document.getElementById('u_phone').value,
+                    emailPersonal: document.getElementById('u_emailPersonal').value
+                },
+                company: {
+                    name: document.getElementById('c_name').value,
+                    rfc: document.getElementById('c_rfc').value,
+                    country: document.getElementById('u_country').value
+                }
+            };
+
+            await genericSaveFunction(payload, 'btnSaveMiCuenta', 'saveMiCuentaStatus');
+        }
+
+        // SAVE LOGIC: 2. Add Team Member
+        async function addTeamMember() {
+            const btn = document.getElementById('btnSaveTeam');
+            const stat = document.getElementById('saveTeamStatus');
+            const f = document.getElementById('formAddMember');
+
+            if (!f.checkValidity()) { f.reportValidity(); return; }
+
+            const payload = {
+                action: 'add_team',
+                member: {
+                    firstName: document.getElementById('t_name').value,
+                    lastName: document.getElementById('t_lastName').value,
+                    email: document.getElementById('t_email').value,
+                    phone: document.getElementById('t_phone').value,
+                    role: document.getElementById('t_role').value
+                }
+            };
+
+            btn.disabled = true;
+            btn.innerHTML = 'Enviando invitación...';
+            try {
+                const res = await fetch('../../api/client/config/save.php', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    f.reset();
+                    loadConfig(); // Reload team table
+                    stat.innerHTML = '<i class="ph ph-check text-green-600 text-lg"></i> Invitación enviada.';
+                    stat.classList.replace('text-red-600', 'text-green-600');
+                    stat.classList.remove('hidden');
+                    setTimeout(() => stat.classList.add('hidden'), 3000);
+                } else {
+                    stat.textContent = 'Error: ' + data.message;
+                    stat.classList.replace('text-green-600', 'text-red-600');
+                    stat.classList.remove('hidden');
+                }
+            } catch (e) { console.error(e); } finally { btn.disabled = false; btn.innerHTML = 'Agregar usuario'; }
+        }
+
+        // SAVE LOGIC: 3. Notifications
+        async function saveNotifications() {
+            const payload = {
+                action: 'notifications',
+                emailOnEvalCompleted: document.getElementById('n_onComplete').value === 'true',
+                dailySummary: document.getElementById('n_daily').value === 'true'
+            };
+            await genericSaveFunction(payload, 'btnSaveNotif', 'saveNotifStatus');
+        }
+
+        // SAVE LOGIC: 4. Templates
+        async function saveTemplate() {
+            const payload = {
+                action: 'template',
+                key: 'invitation_eval', // fixed for now, scalable later
+                subject: document.getElementById('tpl_subject').value,
+                bodyHtml: document.getElementById('tpl_body').innerHTML
+            };
+            await genericSaveFunction(payload, 'btnSaveTpl', 'saveTplStatus');
+        }
+
+        // GENERAL API POST AND UX
+        async function genericSaveFunction(payload, btnId, statusId) {
+            const btn = document.getElementById(btnId);
+            const rawHtml = btn.innerHTML;
+            const stat = document.getElementById(statusId);
+
+            btn.disabled = true;
+            btn.innerHTML = 'Guardando...';
+            stat.classList.add('hidden');
 
             try {
                 const res = await fetch('../../api/client/config/save.php', {
                     method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ rfc })
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
                 });
-
                 const data = await res.json();
-
-                msgBox.classList.remove('hidden');
                 if (data.status === 'success') {
-                    msgBox.className = "text-sm bg-green-50 text-green-700 p-3 rounded mb-4";
-                    msgBox.textContent = data.message;
-                    setTimeout(() => msgBox.classList.add('hidden'), 3000);
+                    stat.classList.remove('hidden');
+                    setTimeout(() => stat.classList.add('hidden'), 3000);
                 } else {
-                    msgBox.className = "text-sm bg-red-50 text-red-700 p-3 rounded mb-4";
-                    msgBox.textContent = data.message;
+                    alert('Error: ' + data.message);
                 }
-            } catch (err) {
-                console.error(err);
+            } catch (e) {
+                alert('Fallo de red al guardar.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = rawHtml;
             }
         }
 
-        function logout() {
-            localStorage.removeItem('kokoro_client_token');
-            window.location.href = '../../index.html';
+        // EXTRAS
+        function updateCount(el, spanId) {
+            document.getElementById(spanId).textContent = el.value.length + " caracteres";
+        }
+
+        let lastFocusedNode = null;
+        document.getElementById('tpl_body').addEventListener('blur', function () {
+            lastFocusedNode = document.getSelection().anchorNode;
+        });
+
+        function insertToken(tokenKey) {
+            const subj = document.getElementById('tpl_subject');
+            const body = document.getElementById('tpl_body');
+
+            // Si el focus más reciente estsaba en el ASUNTO
+            if (document.activeElement === subj) {
+                const start = subj.selectionStart;
+                const end = subj.selectionEnd;
+                subj.value = subj.value.substring(0, start) + tokenKey + subj.value.substring(end);
+                updateCount(subj, 'subjCount');
+            } else {
+                // Insertar en WYSIWYG body
+                body.focus();
+                document.execCommand('insertText', false, tokenKey);
+            }
         }
     </script>
 </body>
