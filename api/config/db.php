@@ -18,10 +18,13 @@ try {
 
 }
 catch (PDOException $e) {
-    // Modo Debug: Mostrar el error real para identificar el problema en cPanel
+    // Inject CORS so explicit database errors bubble up to the Client DOM instead of triggering a CORS Policy network block.
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json; charset=UTF-8");
+    // Modo Debug: Mostrar el error real para identificar el problema en cPanel u Hostinger
     die(json_encode([
-        "success" => false,
-        "error" => "Error de conexión DB: " . $e->getMessage()
+        "status" => "error",
+        "message" => "Error interno DB: " . $e->getMessage()
     ]));
 }
 ?>
