@@ -16,11 +16,15 @@ $userId = $payloadData['id'];
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-$currentPassword = $data['currentPassword'] ?? '';
 $newPassword = $data['newPassword'] ?? '';
+$confirmPassword = $data['confirmPassword'] ?? '';
 
-if (empty($currentPassword) || empty($newPassword)) {
-    Responder::error("Debes ingresar la contraseña actual y la nueva.", 400);
+if (empty($newPassword) || empty($confirmPassword)) {
+    Responder::error("Debes ingresar la nueva contraseña y confirmarla.", 400);
+}
+
+if ($newPassword !== $confirmPassword) {
+    Responder::error("Las contraseñas no coinciden.", 400);
 }
 
 if (strlen($newPassword) < 6) {
@@ -28,19 +32,6 @@ if (strlen($newPassword) < 6) {
 }
 
 try {
-    // Verificar contraseña actual
-    $stmt = $pdo->prepare("SELECT password FROM users WHERE id = :id LIMIT 1");
-    $stmt->execute(['id' => $userId]);
-    $user = $stmt->fetch();
-
-    if (!$user) {
-        Responder::error("Usuario no encontrado.", 404);
-    }
-
-    if (!password_verify($currentPassword, $user['password'])) {
-        Responder::error("La contraseña actual es incorrecta.", 401);
-    }
-
     // Hashear y actualizar
     $newHash = password_hash($newPassword, PASSWORD_BCRYPT);
     $updateStmt = $pdo->prepare("UPDATE users SET password = :pwd, updatedAt = NOW() WHERE id = :id");
